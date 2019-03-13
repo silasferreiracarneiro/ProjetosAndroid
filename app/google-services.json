@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "678227025580",
+    "firebase_url": "https://whatsapp-b2e7c.firebaseio.com",
+    "project_id": "whatsapp-b2e7c",
+    "storage_bucket": "whatsapp-b2e7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678227025580:android:205f97fac5fdff31",
+        "android_client_info": {
+          "package_name": "com.silasferreira.whatsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678227025580-lsinfa2csj8il584dttq0po4nfnniar3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.silasferreira.whatsapp",
+            "certificate_hash": "8e2cacda1b9c4ebe7a2252e81f4ac6f7636cccba"
+          }
+        },
+        {
+          "client_id": "678227025580-9jb4o8f40iuh1lsj0v53df4btno8ib2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUt35EvK-3CyB1PhPdGkSidvA8xFrFiQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678227025580-9jb4o8f40iuh1lsj0v53df4btno8ib2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

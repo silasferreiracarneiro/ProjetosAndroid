@@ -37,6 +37,7 @@
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtNome"
                 android:hint="@string/digite_nome"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,6 +57,7 @@
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtEmail"
                 android:hint="@string/digite_email"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +74,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_height="wrap_content"
-                android:hint="@string/digite_senha" android:layout_width="match_parent"/>
+                android:id="@+id/txtSenha"
+                android:hint="@string/digite_senha"
+                android:layout_width="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -86,6 +90,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="32dp" android:textColor="@android:color/white"
+            android:layout_marginStart="32dp"
+            android:onClick="createUser"
+            android:textColor="@android:color/white"
             android:background="@color/colorPrimaryDark"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
