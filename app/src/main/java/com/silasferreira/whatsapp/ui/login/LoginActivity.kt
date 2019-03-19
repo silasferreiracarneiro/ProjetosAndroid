@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.silasferreira.whatsapp.R
+import com.silasferreira.whatsapp.ui.base.BaseActivity
 import com.silasferreira.whatsapp.ui.cadastro.CadastroActivity
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

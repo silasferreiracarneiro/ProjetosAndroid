@@ -1,4 +1,4 @@
-package com.silasferreira.whatsapp.di
+package com.silasferreira.whatsapp.di.module
 
 import android.app.Application
 import android.content.Context
@@ -7,9 +7,11 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class AppModule(private val app: Application) {
+class ApplicationModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun provideContext(): Context = app
+    fun provideContext(): Context{
+        return application
+    }
 }
