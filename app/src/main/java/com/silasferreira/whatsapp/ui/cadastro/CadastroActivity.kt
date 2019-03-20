@@ -19,6 +19,7 @@ class CadastroActivity : BaseActivity(), CadastroContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
         (application as App).getComponent().inject(this)
+        presenter.onAttach(this)
     }
 
     fun createUser(view: View){

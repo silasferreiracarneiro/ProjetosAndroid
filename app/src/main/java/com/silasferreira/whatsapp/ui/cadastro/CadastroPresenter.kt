@@ -1,12 +1,13 @@
 package com.silasferreira.whatsapp.ui.cadastro
 
-
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.silasferreira.whatsapp.domain.Usuario
 import com.silasferreira.whatsapp.ui.base.BasePresenter
-import java.lang.Exception
+
 import javax.inject.Inject
 
 class CadastroPresenter<V : CadastroContract.View, I : CadastroContract.Interactor>
@@ -14,28 +15,29 @@ class CadastroPresenter<V : CadastroContract.View, I : CadastroContract.Interact
     BasePresenter<V, I>(contractInteractor), CadastroContract.Presenter<V, I> {
 
     override fun createUser(user: Usuario) {
-        var messageUser = ""
         if(this.validateUser(user)){
-            try {
-                contractInteractor.createUser(user)
-                /*var result = usuarioDao.savedUser(user.toDto(), view.getActivity())
 
-                if(result == null){
-                    messageUser = "Usuário cadastrado com sucesso!"
+            var messageUser = ""
+            contractInteractor.createUser(user).addOnCompleteListener(OnCompleteListener {
+                if(it.isSuccessful){
+                    messageUser = "Usuário salvo com sucesso!"
+                    getMvpView().setMessageUser(messageUser)
+                    this.getMvpView().finishActivity()
                 }else{
-                    throw result
-                }*/
-            }catch (e: FirebaseAuthWeakPasswordException){
-                messageUser = "Digite uma senha mais forte!"
-            }catch (e: FirebaseAuthInvalidCredentialsException){
-                messageUser = "Por favor, digite um e-mail válido!"
-            }catch (e: FirebaseAuthUserCollisionException){
-                messageUser = "Esta conta já foi cadastrada!"
-            }catch (e: Exception){
+                    messageUser = when (it.exception) {
+                        is FirebaseAuthWeakPasswordException -> "Digite uma senha mais forte!"
+                        is FirebaseAuthInvalidCredentialsException -> "Por favor, digite um e-mail válido!"
+                        is FirebaseAuthUserCollisionException -> "Esta conta já foi cadastrada!"
+                        else -> "Erro ao cadastrar a conta!"
+                    }
+                    getMvpView().setMessageUser(messageUser)
+                }
+
+            }).addOnFailureListener(OnFailureListener {
                 messageUser = "Erro ao cadastrar a conta!"
-            }
+                getMvpView().setMessageUser(messageUser)
+            })
         }
-        //this.view.setMessageUser(messageUser)
     }
 
     private fun validateUser(user: Usuario) : Boolean{

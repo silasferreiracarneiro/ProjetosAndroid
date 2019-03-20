@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtNome"
-                android:hint="@string/digite_nome"/>
+                android:hint="@string/digite_nome" android:inputType="textPersonName"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtEmail"
-                android:hint="@string/digite_email"/>
+                android:hint="@string/digite_email" android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="0dp"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtSenha"
                 android:hint="@string/digite_senha"
-                android:layout_width="match_parent"/>
+                android:layout_width="match_parent" android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

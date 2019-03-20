@@ -1,7 +1,7 @@
 package com.silasferreira.whatsapp.data.network.model
 
-
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.*
 import com.silasferreira.whatsapp.data.network.FirebaseModule.Companion.authFirebase
 import com.silasferreira.whatsapp.data.network.repository.UsuarioRepository
 import com.silasferreira.whatsapp.domain.Usuario
@@ -10,8 +10,7 @@ class UsuarioRequest: UsuarioRepository {
 
     private val auth: FirebaseAuth = authFirebase()
 
-    override fun savedUser(user: Usuario) {
-        var response = auth.createUserWithEmailAndPassword(user.email, user.senha)
-        //return if (response.isSuccessful) null else response.exception!!
+    override fun savedUser(user: Usuario): Task<AuthResult> {
+        return auth.createUserWithEmailAndPassword(user.email, user.senha)
     }
 }
