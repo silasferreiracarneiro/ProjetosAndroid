@@ -3,11 +3,12 @@ package com.silasferreira.whatsapp.ui.base
 import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.utils.NetworkUtils
 
-abstract class BaseActivity : Activity(), MvpView {
+abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,5 +34,9 @@ abstract class BaseActivity : Activity(), MvpView {
 
     override fun onError(message: String) {
         this.showMessage(message)
+    }
+
+    override fun onFinish() {
+        this.finish()
     }
 }

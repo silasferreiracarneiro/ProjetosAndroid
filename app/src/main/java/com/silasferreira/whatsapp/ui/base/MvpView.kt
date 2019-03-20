@@ -11,4 +11,6 @@ interface MvpView {
     abstract fun onError(@StringRes resId: Int)
 
     abstract fun onError(message: String)
+
+    abstract fun onFinish()
 }

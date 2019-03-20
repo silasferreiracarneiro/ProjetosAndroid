@@ -5,4 +5,6 @@
     <string name="digite_senha">Digite sua senha</string>
     <string name="botao_cadastrar">Cadastrar</string>
     <string name="some_error">Some error occurred!</string>
+
+    <string name="usuario_salvo">Usuário salvo com sucesso!</string>
 </resources>

@@ -5,6 +5,8 @@ import com.silasferreira.whatsapp.di.component.ApplicationComponent
 import com.silasferreira.whatsapp.di.component.DaggerApplicationComponent
 import com.silasferreira.whatsapp.di.module.ApplicationModule
 import com.silasferreira.whatsapp.di.module.CadastroModule
+import com.silasferreira.whatsapp.di.module.HomeModule
+import com.silasferreira.whatsapp.di.module.LoginModule
 
 class App : Application() {
 
@@ -17,6 +19,8 @@ class App : Application() {
             .builder()
             .applicationModule(ApplicationModule(this))
             .cadastroModule(CadastroModule())
+            .loginModule(LoginModule())
+            .homeModule(HomeModule())
             .build()
 
         //component.inject(this)

@@ -2,6 +2,7 @@ package com.silasferreira.whatsapp.di.module
 
 import com.silasferreira.whatsapp.data.network.model.UsuarioRequest
 import com.silasferreira.whatsapp.data.network.repository.UsuarioRepository
+import com.silasferreira.whatsapp.di.AnnotationHelper
 import com.silasferreira.whatsapp.ui.cadastro.CadastroContract
 import com.silasferreira.whatsapp.ui.cadastro.CadastroInteractor
 import com.silasferreira.whatsapp.ui.cadastro.CadastroPresenter
@@ -22,6 +23,7 @@ class CadastroModule {
     }
 
     @Provides
+    @AnnotationHelper.CadastroRepository
     fun provideCadastroRepository(): UsuarioRepository{
         return UsuarioRequest()
     }

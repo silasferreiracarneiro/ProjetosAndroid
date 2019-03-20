@@ -1,4 +1,4 @@
-package com.silasferreira.whatsapp.domain
+package com.silasferreira.whatsapp.model
 
 class Usuario(
     var nome: String,
