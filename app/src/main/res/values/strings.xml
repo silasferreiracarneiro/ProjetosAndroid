@@ -10,4 +10,9 @@
 
     <string name="title_conversa">Conversas</string>
     <string name="title_contato">Contatos</string>
+    <string name="title_setting">Configurações</string>
+    <string name="message_setting_user">Esse não é o seu nome de usuário nem sua senha. Esse nome ficará visível para
+        seus contatos do WhatsApp
+    </string>
+    <string name="name_user_setting">Nome do usuário</string>
 </resources>

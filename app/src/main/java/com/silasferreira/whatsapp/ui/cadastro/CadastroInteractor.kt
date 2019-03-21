@@ -11,4 +11,12 @@ class CadastroInteractor(val usuarioRepository: UsuarioRepository) : BaseInterac
     override fun createUser(user: Usuario): Task<AuthResult> {
         return usuarioRepository.savedUser(user)
     }
+
+    override fun savedUser(user: Usuario) {
+        usuarioRepository.createUserInDatabase(user)
+    }
+
+    override fun deleteUserInAuthentication(): Task<Void>? {
+        return usuarioRepository.deleteUserInAuthentication()
+    }
 }

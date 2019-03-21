@@ -27,6 +27,7 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     fun signIn(view: View) {
         var user = Usuario(
             "",
+            "",
             edtEmail.text.toString(),
             edtSenha.text.toString()
         )

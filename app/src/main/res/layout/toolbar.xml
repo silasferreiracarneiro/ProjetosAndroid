@@ -13,6 +13,7 @@
             android:elevation="10dp"
             app:title="@string/app_name"
             app:titleTextColor="@color/white"
-            android:id="@+id/toolbarHome"/>
+            app:theme="@style/ToolbarTheme"
+            android:id="@+id/toolbar"/>
 
 </FrameLayout>

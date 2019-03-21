@@ -6,6 +6,7 @@ import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseActivity
+import com.silasferreira.whatsapp.utils.Base64Utils.encode
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import javax.inject.Inject
 
@@ -24,6 +25,7 @@ class CadastroActivity : BaseActivity(), CadastroContract.View {
     fun createUser(view: View){
 
         var user = Usuario(
+            encode(txtEmail?.text.toString()),
             txtNome?.text.toString(),
             txtEmail?.text.toString(),
             txtSenha?.text.toString()

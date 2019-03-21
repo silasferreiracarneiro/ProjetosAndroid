@@ -11,11 +11,15 @@ interface CadastroContract {
 
     interface Presenter<V : CadastroContract.View, I: CadastroContract.Interactor>: MvpPresenter<V, I> {
         fun createUser(user: Usuario)
+        fun savedUser(user: Usuario)
+        fun deleteUserInAuthentication()
     }
 
     interface View : MvpView
 
     interface Interactor: MvpInteractor {
         fun createUser(user: Usuario): Task<AuthResult>
+        fun savedUser(user: Usuario)
+        fun deleteUserInAuthentication(): Task<Void>?
     }
 }

@@ -1,5 +1,6 @@
 package com.silasferreira.whatsapp.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.ui.base.BaseActivity
 import com.silasferreira.whatsapp.ui.home.contato.ContatoFragment
 import com.silasferreira.whatsapp.ui.home.conversa.ConversaFragment
+import com.silasferreira.whatsapp.ui.setting.SettingActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
@@ -27,8 +29,8 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         (application as App).getComponent().inject(this)
         presenter.onAttach(this)
 
-        //Configation Toolbar
-        var toolbar = toolbarHome as Toolbar
+        //Configuration Toolbar
+        var toolbar = toolbar as Toolbar
         setSupportActionBar(toolbar)
 
         //Configuration Tabs
@@ -53,8 +55,12 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         when(item?.itemId){
             R.id.itemSearch -> ""
             R.id.itemLoggout -> presenter.logout()
-            R.id.itemSettings -> ""
+            R.id.itemSettings -> getSetting()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun getSetting(){
+        startActivity(Intent(applicationContext, SettingActivity::class.java))
     }
 }

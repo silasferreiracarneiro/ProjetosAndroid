@@ -1,6 +1,8 @@
-/*
-* Smart tab: https://github.com/ogaclejapan/SmartTabLayout
-*
+/**
+ ** CREDITOS **
+ *
+ * Smart tab: https://github.com/ogaclejapan/SmartTabLayout
+ * Circle image view: https://github.com/hdodenhof/CircleImageView
 * */
 
 apply plugin: 'com.android.application'
@@ -10,6 +12,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 28
@@ -59,6 +62,9 @@ dependencies {
     //SmartTab
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
+
+    //Circle image view
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'

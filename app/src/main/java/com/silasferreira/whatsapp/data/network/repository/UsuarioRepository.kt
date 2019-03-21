@@ -11,4 +11,6 @@ interface UsuarioRepository {
     fun signIn(user: Usuario): Task<AuthResult>
     fun loggedIn(): FirebaseUser?
     fun logout()
+    fun createUserInDatabase(user: Usuario)
+    fun deleteUserInAuthentication(): Task<Void>?
 }
