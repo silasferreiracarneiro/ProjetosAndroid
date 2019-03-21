@@ -23,6 +23,7 @@ class SettingActivity : BaseActivity() {
     private val awards = arrayListOf(READ_EXTERNAL_STORAGE)
     private val CAMERA = 100
     private val GALERY = 200
+    private val REQUEST_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,8 +91,10 @@ class SettingActivity : BaseActivity() {
             }
         }
 
-        val array = arrayOfNulls<String>(arrayRequest.size)
-        requestPermissions(this, arrayRequest.toArray(array), 1)
+        if(arrayRequest.size > 0){
+            val array = arrayOfNulls<String>(arrayRequest.size)
+            requestPermissions(this, arrayRequest.toArray(array), REQUEST_PERMISSION)
+        }
     }
 
 
