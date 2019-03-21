@@ -4,6 +4,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import com.silasferreira.whatsapp.data.network.FirebaseModule.Companion.authFirebase
 import com.silasferreira.whatsapp.data.network.FirebaseModule.Companion.database
 import com.silasferreira.whatsapp.data.network.FirebaseModule.Companion.storage
@@ -47,7 +48,8 @@ class UsuarioRequest: UsuarioRepository {
         return auth.currentUser?.delete()
     }
 
-    override fun savedImageUser(keyUser: String){
+    override fun savedImageUser(keyUser: String, image: ByteArray): UploadTask {
         var ref = storage.reference.child("imagens").child("perfil").child("$keyUser.jpeg")
+        return ref.putBytes(image)
     }
 }

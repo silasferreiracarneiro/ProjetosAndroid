@@ -8,8 +8,15 @@ class SettingPresenter<V: SettingContract.View, I: SettingContract.Interactor>
     BasePresenter<V, I>(settingInteractor), SettingContract.Presenter<V, I> {
 
 
-    override fun uploadImage() {
-        settingInteractor.uploadImage()
+    override fun uploadImage(image: ByteArray) {
+        settingInteractor.uploadImage(image).addOnCompleteListener{
+            if(it.isSuccessful){
+                getMvpView().setImageUser()
+            }else{
+                getMvpView().onError("Erro ao salvar a imagem!")
+            }
+        }.addOnFailureListener{
+            getMvpView().onError("Erro ao salvar a imagem!")
+        }
     }
-
 }

@@ -3,7 +3,6 @@ package com.silasferreira.whatsapp.ui.setting
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -17,6 +16,7 @@ import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 class SettingActivity : BaseActivity(), SettingContract.View {
@@ -28,6 +28,8 @@ class SettingActivity : BaseActivity(), SettingContract.View {
     private val CAMERA = 100
     private val GALERY = 200
     private val REQUEST_PERMISSION = 1
+
+    private var map : Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +64,6 @@ class SettingActivity : BaseActivity(), SettingContract.View {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(resultCode == Activity.RESULT_OK){
-            var map : Bitmap? = null
-
             try {
                 map = when(requestCode){
                     CAMERA -> data?.extras?.get("data") as Bitmap?
@@ -74,7 +74,9 @@ class SettingActivity : BaseActivity(), SettingContract.View {
             }
 
             if(map != null){
-                imagePerfilUser.setImageBitmap(map)
+                var baos = ByteArrayOutputStream()
+                map?.compress(Bitmap.CompressFormat.JPEG, 80, baos)
+                this.presenter.uploadImage(baos.toByteArray())
             }
         }
     }
@@ -87,6 +89,10 @@ class SettingActivity : BaseActivity(), SettingContract.View {
                 alertPermission()
             }
         }
+    }
+
+    override fun setImageUser() {
+        imagePerfilUser.setImageBitmap(map)
     }
 
     fun validatedPermissions(){
