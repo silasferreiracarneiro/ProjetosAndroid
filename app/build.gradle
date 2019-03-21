@@ -1,3 +1,8 @@
+/*
+* Smart tab: https://github.com/ogaclejapan/SmartTabLayout
+*
+* */
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -41,25 +46,19 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
 
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-
-    //Gson
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-
-    //Okhttp
-    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.13.1'
-
     //Dagger
     implementation 'com.google.dagger:dagger:2.12'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     kapt 'com.google.dagger:dagger-compiler:2.12'
 
     //RxJava
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.2.6'
     implementation "com.squareup.retrofit2:adapter-rxjava:2.5.0"
+
+    //SmartTab
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'

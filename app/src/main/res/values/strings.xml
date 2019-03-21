@@ -7,4 +7,7 @@
     <string name="some_error">Some error occurred!</string>
 
     <string name="usuario_salvo">Usuário salvo com sucesso!</string>
+
+    <string name="title_conversa">Conversas</string>
+    <string name="title_contato">Contatos</string>
 </resources>

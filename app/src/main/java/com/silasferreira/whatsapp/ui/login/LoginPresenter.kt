@@ -19,7 +19,6 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
             .addOnCompleteListener(OnCompleteListener {
                 if(it.isSuccessful){
                     getMvpView().goHome()
-                    getMvpView().onFinish()
                 }else{
 
                     var message = when (it.exception){
