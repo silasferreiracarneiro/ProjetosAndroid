@@ -13,4 +13,5 @@ interface UsuarioRepository {
     fun logout()
     fun createUserInDatabase(user: Usuario)
     fun deleteUserInAuthentication(): Task<Void>?
+    fun savedImageUser(keyUser: String)
 }

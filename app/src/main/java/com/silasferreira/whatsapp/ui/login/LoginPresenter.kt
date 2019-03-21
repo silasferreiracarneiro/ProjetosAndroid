@@ -8,16 +8,19 @@ import com.silasferreira.whatsapp.ui.base.BasePresenter
 import javax.inject.Inject
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
+import com.silasferreira.whatsapp.utils.Base64Utils.encode
 
 
 class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
-    @Inject constructor(var contractInteractor: I):
+    @Inject constructor(var contractInteractor: I, var prefHelter: PreferencesHelper):
     BasePresenter<V, I>(contractInteractor), LoginContract.Presenter<V, I> {
 
     override fun signIn(user: Usuario) {
         contractInteractor.signIn(user)
             .addOnCompleteListener(OnCompleteListener {
                 if(it.isSuccessful){
+                    prefHelter.setUserId(encode(user.email))
                     getMvpView().goHome()
                 }else{
 
@@ -37,7 +40,9 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
     }
 
     override fun loggedIn() {
-        if(contractInteractor.loggedIn() != null){
+        var user = contractInteractor.loggedIn()
+        if(user != null){
+            prefHelter.setUserId(encode(user.email))
             getMvpView().goHome()
         }
     }

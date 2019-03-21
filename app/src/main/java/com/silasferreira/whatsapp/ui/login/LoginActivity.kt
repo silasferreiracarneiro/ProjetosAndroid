@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
+import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseActivity
 import com.silasferreira.whatsapp.ui.cadastro.CadastroActivity
@@ -31,7 +32,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
             edtEmail.text.toString(),
             edtSenha.text.toString()
         )
-
         this.presenter.signIn(user)
     }
 

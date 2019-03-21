@@ -1,10 +1,9 @@
 package com.silasferreira.whatsapp.ui.setting
 
-import android.Manifest.permission.CAMERA
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.app.Application
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -13,12 +12,17 @@ import android.os.Bundle
 import android.provider.MediaStore
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat.checkSelfPermission
+import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.toolbar.*
+import javax.inject.Inject
 
-class SettingActivity : BaseActivity() {
+class SettingActivity : BaseActivity(), SettingContract.View {
+
+    @Inject
+    lateinit var presenter: SettingContract.Presenter<SettingContract.View, SettingContract.Interactor>
 
     private val awards = arrayListOf(READ_EXTERNAL_STORAGE)
     private val CAMERA = 100
@@ -28,6 +32,9 @@ class SettingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+
+        (application as App).getComponent().inject(this)
+        presenter.onAttach(this)
 
         //Configurations Toolbar
         toolbar.setTitle(R.string.title_setting)

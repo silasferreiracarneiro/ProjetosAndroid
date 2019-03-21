@@ -13,4 +13,8 @@ public interface AnnotationHelper {
     @Qualifier
     @Retention(RetentionPolicy.RUNTIME)
     @interface CadastroRepository{}
+
+    @Qualifier
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface SettingRepository{}
 }

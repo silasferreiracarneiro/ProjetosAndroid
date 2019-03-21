@@ -3,10 +3,7 @@ package com.silasferreira.whatsapp
 import android.app.Application
 import com.silasferreira.whatsapp.di.component.ApplicationComponent
 import com.silasferreira.whatsapp.di.component.DaggerApplicationComponent
-import com.silasferreira.whatsapp.di.module.ApplicationModule
-import com.silasferreira.whatsapp.di.module.CadastroModule
-import com.silasferreira.whatsapp.di.module.HomeModule
-import com.silasferreira.whatsapp.di.module.LoginModule
+import com.silasferreira.whatsapp.di.module.*
 
 class App : Application() {
 
@@ -21,6 +18,7 @@ class App : Application() {
             .cadastroModule(CadastroModule())
             .loginModule(LoginModule())
             .homeModule(HomeModule())
+            .settingModule(SettingModule())
             .build()
 
         //component.inject(this)

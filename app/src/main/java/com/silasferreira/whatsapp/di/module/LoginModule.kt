@@ -2,6 +2,7 @@ package com.silasferreira.whatsapp.di.module
 
 import com.silasferreira.whatsapp.data.network.model.UsuarioRequest
 import com.silasferreira.whatsapp.data.network.repository.UsuarioRepository
+import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.di.AnnotationHelper
 import com.silasferreira.whatsapp.ui.login.LoginContract
 import com.silasferreira.whatsapp.ui.login.LoginInteractor
@@ -13,8 +14,8 @@ import dagger.Provides
 class LoginModule {
 
     @Provides
-    fun provideLoginPresenter(interactor: LoginContract.Interactor) : LoginContract.Presenter<LoginContract.View, LoginContract.Interactor> {
-        return LoginPresenter(interactor)
+    fun provideLoginPresenter(interactor: LoginContract.Interactor, prefHelter: PreferencesHelper) : LoginContract.Presenter<LoginContract.View, LoginContract.Interactor> {
+        return LoginPresenter(interactor, prefHelter)
     }
 
     @Provides
