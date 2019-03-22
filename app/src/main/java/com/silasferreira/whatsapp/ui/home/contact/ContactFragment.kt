@@ -32,7 +32,7 @@ class ContactFragment : BaseFragment(), ContactContract.View  {
             presenter.onAttach(this)
         }
 
-        recyler = view.findViewById(R.id.recyclerConversation) as RecyclerView
+        recyler = view.findViewById(R.id.recycleContact) as RecyclerView
 
         return view
     }
