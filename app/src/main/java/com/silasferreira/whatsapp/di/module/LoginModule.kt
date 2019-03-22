@@ -24,7 +24,7 @@ class LoginModule {
     }
 
     @Provides @AnnotationHelper.LoginRepository
-    fun provideLoginRepository() : UsuarioRepository{
-        return UsuarioRequest()
+    fun provideLoginRepository(prefHelter: PreferencesHelper) : UsuarioRepository{
+        return UsuarioRequest(prefHelter)
     }
 }

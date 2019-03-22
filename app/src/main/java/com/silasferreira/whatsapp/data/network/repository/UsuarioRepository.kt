@@ -3,7 +3,7 @@ package com.silasferreira.whatsapp.data.network.repository
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.storage.UploadTask
+import com.google.firebase.database.DatabaseReference
 import com.silasferreira.whatsapp.model.Usuario
 
 interface UsuarioRepository {
@@ -14,5 +14,7 @@ interface UsuarioRepository {
     fun logout()
     fun createUserInDatabase(user: Usuario)
     fun deleteUserInAuthentication(): Task<Void>?
-    fun savedImageUser(keyUser: String, image: ByteArray): UploadTask
+    fun savedImageUser(image: ByteArray)
+    //fun updateUserPhoto(): Task<Void>?
+    fun searchUserPhoto(): DatabaseReference
 }

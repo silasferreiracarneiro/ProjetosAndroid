@@ -9,6 +9,7 @@ import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat.checkSelfPermission
 import com.silasferreira.whatsapp.App
@@ -28,8 +29,6 @@ class SettingActivity : BaseActivity(), SettingContract.View {
     private val CAMERA = 100
     private val GALERY = 200
     private val REQUEST_PERMISSION = 1
-
-    private var map : Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,11 +57,13 @@ class SettingActivity : BaseActivity(), SettingContract.View {
                 startActivityForResult(intent, GALERY)
             }
         }
+
+        this.presenter.searchUserPhoto()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        var map: Bitmap? = null
         if(resultCode == Activity.RESULT_OK){
             try {
                 map = when(requestCode){
@@ -75,7 +76,7 @@ class SettingActivity : BaseActivity(), SettingContract.View {
 
             if(map != null){
                 var baos = ByteArrayOutputStream()
-                map?.compress(Bitmap.CompressFormat.JPEG, 80, baos)
+                map?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                 this.presenter.uploadImage(baos.toByteArray())
             }
         }
@@ -89,10 +90,6 @@ class SettingActivity : BaseActivity(), SettingContract.View {
                 alertPermission()
             }
         }
-    }
-
-    override fun setImageUser() {
-        imagePerfilUser.setImageBitmap(map)
     }
 
     fun validatedPermissions(){
@@ -121,5 +118,9 @@ class SettingActivity : BaseActivity(), SettingContract.View {
             finish()
         }
         builder.create().show()
+    }
+
+    override fun setImageUser(map: Bitmap){
+        imagePerfilUser.setImageBitmap(map)
     }
 }

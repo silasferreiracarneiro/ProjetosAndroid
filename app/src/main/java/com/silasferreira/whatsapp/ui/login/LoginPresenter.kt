@@ -21,6 +21,7 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
             .addOnCompleteListener(OnCompleteListener {
                 if(it.isSuccessful){
                     prefHelter.setUserId(encode(user.email))
+                    prefHelter.setNameUser(user.nome)
                     getMvpView().goHome()
                 }else{
 
@@ -43,6 +44,7 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
         var user = contractInteractor.loggedIn()
         if(user != null){
             prefHelter.setUserId(encode(user.email))
+            prefHelter.setNameUser(user?.displayName!!)
             getMvpView().goHome()
         }
     }

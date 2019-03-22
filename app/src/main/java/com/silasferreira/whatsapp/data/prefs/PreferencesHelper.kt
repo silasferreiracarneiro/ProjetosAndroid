@@ -7,4 +7,6 @@ interface PreferencesHelper {
 
     fun setUserId(userId: String)
     fun getUserId(): String
+    fun setNameUser(name: String)
+    fun getNameUser(): String
 }

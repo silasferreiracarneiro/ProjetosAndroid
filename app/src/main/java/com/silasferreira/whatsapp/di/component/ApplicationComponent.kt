@@ -1,5 +1,6 @@
 package com.silasferreira.whatsapp.di.component
 
+import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.di.module.*
 import com.silasferreira.whatsapp.ui.base.BaseActivity
 import com.silasferreira.whatsapp.ui.cadastro.CadastroActivity
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     SettingModule::class
 ])
 interface ApplicationComponent {
+    fun inject(app: App)
     fun inject(activity: BaseActivity)
     fun inject(activity: CadastroActivity)
     fun inject(activity: HomeActivity)

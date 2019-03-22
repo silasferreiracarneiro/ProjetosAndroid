@@ -19,13 +19,13 @@ class SettingModule {
     }
 
     @Provides
-    fun provideSettingInteractor(repository: UsuarioRepository, preferenceHelper: PreferencesHelper): SettingContract.Interactor{
-        return SettingInteractor(repository, preferenceHelper)
+    fun provideSettingInteractor(repository: UsuarioRepository): SettingContract.Interactor{
+        return SettingInteractor(repository)
     }
 
     @Provides @AnnotationHelper.SettingRepository
-    fun provideSettingRepository(): UsuarioRepository{
-        return UsuarioRequest()
+    fun provideSettingRepository(prefHelter: PreferencesHelper): UsuarioRepository{
+        return UsuarioRequest(prefHelter)
     }
 
 }
