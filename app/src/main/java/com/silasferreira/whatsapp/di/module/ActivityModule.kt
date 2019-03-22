@@ -11,6 +11,9 @@ import com.silasferreira.whatsapp.ui.cadastro.CadastroPresenter
 import com.silasferreira.whatsapp.ui.home.HomeContract
 import com.silasferreira.whatsapp.ui.home.HomeInteractor
 import com.silasferreira.whatsapp.ui.home.HomePresenter
+import com.silasferreira.whatsapp.ui.home.contact.ContactContract
+import com.silasferreira.whatsapp.ui.home.contact.ContactInteractor
+import com.silasferreira.whatsapp.ui.home.contact.ContactPresenter
 import com.silasferreira.whatsapp.ui.home.conversation.ConversationContract
 import com.silasferreira.whatsapp.ui.home.conversation.ConversationInteractor
 import com.silasferreira.whatsapp.ui.home.conversation.ConversationPresenter
@@ -91,6 +94,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideConversationInteractor(repository: UsuarioRepository) : ConversationContract.Integractor{
         return ConversationInteractor(repository)
+    }
+
+    //CONTACT
+    @Provides
+    @PerActivity
+    fun provideContactPresenter(interactor: ContactContract.Integractor): ContactContract.Presenter<ContactContract.View, ContactContract.Integractor>{
+        return ContactPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideContactInteractor(repository: UsuarioRepository) : ContactContract.Integractor{
+        return ContactInteractor(repository)
     }
 
     //Repository

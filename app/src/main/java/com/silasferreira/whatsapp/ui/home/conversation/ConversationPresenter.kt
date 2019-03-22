@@ -27,7 +27,7 @@ class ConversationPresenter<V: ConversationContract.View, I: ConversationContrac
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                getMvpView().onError("Erro ao buscar a foto!")
+                getMvpView().onError("Erro ao buscar as conversas!")
             }
         }
 
