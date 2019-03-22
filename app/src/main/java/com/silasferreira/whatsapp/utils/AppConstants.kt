@@ -14,6 +14,6 @@ class AppConstants {
         val PATH_IMAGE = "imagens"
         val PATH_PROFILE = "perfil"
         val PATH_FOTO = "foto"
-
+        val PATH_NAME_USER = "nameUser"
     }
 }

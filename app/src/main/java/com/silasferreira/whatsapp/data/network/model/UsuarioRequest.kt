@@ -9,6 +9,7 @@ import com.silasferreira.whatsapp.data.network.repository.UsuarioRepository
 import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.utils.AppConstants.Companion.PATH_FOTO
+import com.silasferreira.whatsapp.utils.AppConstants.Companion.PATH_NAME_USER
 import com.silasferreira.whatsapp.utils.AppConstants.Companion.PATH_USER
 import com.silasferreira.whatsapp.utils.Base64Utils
 import java.lang.Exception
@@ -62,13 +63,24 @@ class UsuarioRequest @Inject constructor(var prefHelter: PreferencesHelper): Usu
         }
     }
 
-    /*override fun updateUserPhoto(): DatabaseReference {
-        var user = this.loggedIn()
-        return reference.child(PATH_USER).child(Base64Utils.encode(user?.email))
-    }*/
+    override fun updateNameUser(name: String) {
+        try {
+            var user = this.loggedIn()
+            if(user != null){
+                var ref = reference.child(PATH_USER).child(Base64Utils.encode(user.email)).child(PATH_NAME_USER)
+                ref.setValue(name)
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
 
-    override fun searchUserPhoto(): DatabaseReference {
+    override fun searchUser(): DatabaseReference {
         var user = this.loggedIn()
         return reference.child(PATH_USER).child(Base64Utils.encode(user?.email))
+    }
+
+    override fun getListUser(): DatabaseReference {
+        return reference.child(PATH_USER)
     }
 }

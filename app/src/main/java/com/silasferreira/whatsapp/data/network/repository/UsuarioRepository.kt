@@ -15,6 +15,7 @@ interface UsuarioRepository {
     fun createUserInDatabase(user: Usuario)
     fun deleteUserInAuthentication(): Task<Void>?
     fun savedImageUser(image: ByteArray)
-    //fun updateUserPhoto(): Task<Void>?
-    fun searchUserPhoto(): DatabaseReference
+    fun updateNameUser(name: String)
+    fun searchUser(): DatabaseReference
+    fun getListUser(): DatabaseReference
 }

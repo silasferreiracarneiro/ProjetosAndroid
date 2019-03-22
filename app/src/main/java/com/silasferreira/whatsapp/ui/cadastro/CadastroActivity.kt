@@ -18,7 +18,7 @@ class CadastroActivity : BaseActivity(), CadastroContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
-        (application as App).getComponent().inject(this)
+        getActivityComponent().inject(this)
         presenter.onAttach(this)
     }
 
@@ -28,7 +28,9 @@ class CadastroActivity : BaseActivity(), CadastroContract.View {
             encode(txtEmail?.text.toString()),
             txtNome?.text.toString(),
             txtEmail?.text.toString(),
-            txtSenha?.text.toString()
+            txtSenha?.text.toString(),
+            "",
+            txtNome?.text.toString()
         )
 
         this.presenter.createUser(user)

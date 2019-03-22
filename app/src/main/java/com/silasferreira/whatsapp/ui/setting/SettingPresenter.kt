@@ -7,8 +7,7 @@ import javax.inject.Inject
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.silasferreira.whatsapp.model.Usuario
-import com.silasferreira.whatsapp.utils.Base64Utils.decodeByte
-import com.silasferreira.whatsapp.utils.Base64Utils.decodebase64InBitmap
+import com.silasferreira.whatsapp.utils.Base64Utils.*
 
 
 class SettingPresenter<V: SettingContract.View, I: SettingContract.Interactor>
@@ -26,18 +25,29 @@ class SettingPresenter<V: SettingContract.View, I: SettingContract.Interactor>
         }
     }
 
-    override fun searchUserPhoto() {
+    override fun searchUser() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var user = dataSnapshot.getValue(Usuario::class.java)
-                var byte = decodeByte(user?.foto)
+                var byte = decodeBase64ToByte(user?.foto)
                 getMvpView().setImageUser(decodebase64InBitmap(byte))
+                getMvpView().setNameUser(user?.nameUser!!)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 getMvpView().onError("Erro ao buscar a foto!")
             }
         }
-        this.settingInteractor.searchUserPhoto().addValueEventListener(postListener)
+        this.settingInteractor.searchUser().addValueEventListener(postListener)
+    }
+
+    override fun updateNameUser(name: String) {
+        try {
+            this.settingInteractor.updateNameUser(name)
+            getMvpView().showMessage("Sucesso ao salvar nome de usuário!")
+        }catch (e: Exception){
+            e.printStackTrace()
+            getMvpView().showMessage("Erro ao salvar nome de usuário!")
+        }
     }
 }

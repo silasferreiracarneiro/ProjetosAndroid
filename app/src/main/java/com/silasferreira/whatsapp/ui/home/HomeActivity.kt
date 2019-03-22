@@ -7,11 +7,10 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
-import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.ui.base.BaseActivity
-import com.silasferreira.whatsapp.ui.home.contato.ContatoFragment
-import com.silasferreira.whatsapp.ui.home.conversa.ConversaFragment
+import com.silasferreira.whatsapp.ui.home.contact.ContactFragment
+import com.silasferreira.whatsapp.ui.home.conversation.ConversationFragment
 import com.silasferreira.whatsapp.ui.setting.SettingActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -26,7 +25,7 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        (application as App).getComponent().inject(this)
+        getActivityComponent().inject(this)
         presenter.onAttach(this)
 
         //Configuration Toolbar
@@ -37,8 +36,8 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         var adapter = FragmentPagerItemAdapter(
             supportFragmentManager,
             FragmentPagerItems.with(this)
-                .add(R.string.title_conversa, ConversaFragment::class.java)
-                .add(R.string.title_contato, ContatoFragment::class.java)
+                .add(R.string.title_conversa, ConversationFragment::class.java)
+                .add(R.string.title_contato, ContactFragment::class.java)
                 .create())
 
         vpHome.adapter = adapter

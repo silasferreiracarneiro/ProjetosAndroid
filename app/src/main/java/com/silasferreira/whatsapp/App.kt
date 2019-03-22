@@ -19,10 +19,6 @@ class App : Application() {
         component = DaggerApplicationComponent
             .builder()
             .applicationModule(ApplicationModule(this))
-            .cadastroModule(CadastroModule())
-            .loginModule(LoginModule())
-            .homeModule(HomeModule())
-            .settingModule(SettingModule())
             .build()
 
         component.inject(this)

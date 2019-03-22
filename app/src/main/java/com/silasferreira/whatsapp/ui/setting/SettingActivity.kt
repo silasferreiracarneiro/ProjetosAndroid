@@ -34,7 +34,7 @@ class SettingActivity : BaseActivity(), SettingContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        (application as App).getComponent().inject(this)
+        getActivityComponent().inject(this)
         presenter.onAttach(this)
 
         //Configurations Toolbar
@@ -58,7 +58,11 @@ class SettingActivity : BaseActivity(), SettingContract.View {
             }
         }
 
-        this.presenter.searchUserPhoto()
+        edtProfileUser.setOnClickListener{
+            this.presenter.updateNameUser(edtNameUser?.text.toString())
+        }
+
+        this.presenter.searchUser()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -122,5 +126,9 @@ class SettingActivity : BaseActivity(), SettingContract.View {
 
     override fun setImageUser(map: Bitmap){
         imagePerfilUser.setImageBitmap(map)
+    }
+
+    override fun setNameUser(name: String) {
+        edtNameUser.setText(name)
     }
 }

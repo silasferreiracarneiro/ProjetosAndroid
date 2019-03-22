@@ -18,7 +18,7 @@ public final class Base64Utils {
         return Base64.encodeToString(array, Base64.DEFAULT);
     }
 
-    public static byte[] decodeByte(String base64){
+    public static byte[] decodeBase64ToByte(String base64){
         return Base64.decode(base64, Base64.DEFAULT);
     }
 

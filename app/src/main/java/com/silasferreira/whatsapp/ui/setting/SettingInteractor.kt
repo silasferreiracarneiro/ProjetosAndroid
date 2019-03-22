@@ -10,7 +10,11 @@ class SettingInteractor(var usuarioRepository: UsuarioRepository): BaseInteracto
         this.usuarioRepository.savedImageUser(image)
     }
 
-    override fun searchUserPhoto(): DatabaseReference {
-        return this.usuarioRepository.searchUserPhoto()
+    override fun searchUser(): DatabaseReference {
+        return this.usuarioRepository.searchUser()
+    }
+
+    override fun updateNameUser(name: String) {
+        this.usuarioRepository.updateNameUser(name)
     }
 }

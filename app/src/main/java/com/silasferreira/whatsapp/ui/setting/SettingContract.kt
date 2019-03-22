@@ -10,15 +10,18 @@ interface SettingContract {
 
     interface Presenter<V: SettingContract.View, I: SettingContract.Interactor>: MvpPresenter<V, I>{
         fun uploadImage(image: ByteArray)
-        fun searchUserPhoto()
+        fun updateNameUser(name: String)
+        fun searchUser()
     }
 
     interface View: MvpView{
         fun setImageUser(map: Bitmap)
+        fun setNameUser(name: String)
     }
 
     interface Interactor: MvpInteractor{
         fun uploadImage(image: ByteArray)
-        fun searchUserPhoto(): DatabaseReference
+        fun updateNameUser(name: String)
+        fun searchUser(): DatabaseReference
     }
 }

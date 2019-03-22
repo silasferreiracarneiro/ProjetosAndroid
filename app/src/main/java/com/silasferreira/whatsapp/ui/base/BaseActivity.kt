@@ -1,19 +1,27 @@
 package com.silasferreira.whatsapp.ui.base
 
-import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
+import com.silasferreira.whatsapp.di.component.ActivityComponent
+import com.silasferreira.whatsapp.di.component.ApplicationComponent
+import com.silasferreira.whatsapp.di.component.DaggerActivityComponent
+import com.silasferreira.whatsapp.di.module.ActivityModule
 import com.silasferreira.whatsapp.utils.NetworkUtils
 
-abstract class BaseActivity : AppCompatActivity(), MvpView {
+abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callback {
+
+    private lateinit var mActivityComponent: ActivityComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (application as App).getComponent().inject(this)
+        mActivityComponent = DaggerActivityComponent.builder()
+            .activityModule(ActivityModule(this))
+            .applicationComponent((application as App).getComponent())
+            .build()
     }
 
     override fun showMessage(message: String) {
@@ -38,5 +46,17 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 
     override fun onFinish() {
         this.finish()
+    }
+
+    override fun onFragmentAttached() {
+
+    }
+
+    override fun onFragmentDetached(tag: String) {
+
+    }
+
+    fun getActivityComponent(): ActivityComponent {
+        return mActivityComponent
     }
 }

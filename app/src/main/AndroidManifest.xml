@@ -23,13 +23,17 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".ui.setting.SettingActivity"
-                android:parentActivityName=".ui.home.HomeActivity">
+                android:parentActivityName=".ui.home.HomeActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.home.HomeActivity">
+        <activity android:name=".ui.home.HomeActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.cadastro.CadastroActivity">
+        <activity android:name=".ui.cadastro.CadastroActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
