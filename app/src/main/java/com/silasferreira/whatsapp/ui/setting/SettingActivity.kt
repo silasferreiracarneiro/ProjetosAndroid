@@ -131,4 +131,8 @@ class SettingActivity : BaseActivity(), SettingContract.View {
     override fun setNameUser(name: String) {
         edtNameUser.setText(name)
     }
+
+    override fun setImageDefault() {
+        imagePerfilUser.setImageResource(R.drawable.padrao)
+    }
 }

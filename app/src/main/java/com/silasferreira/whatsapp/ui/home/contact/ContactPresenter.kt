@@ -19,7 +19,7 @@ class ContactPresenter<V: ContactContract.View, I: ContactContract.Integractor>
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 dataSnapshot.children.forEach {
                                         var user = it.getValue(Usuario::class.java)!!
-                                        if(currencyUser?.email.equals(user.email)){
+                                        if(!currencyUser?.email.equals(user.email)){
                                                 listUser.add(user)
                                         }
                                 }

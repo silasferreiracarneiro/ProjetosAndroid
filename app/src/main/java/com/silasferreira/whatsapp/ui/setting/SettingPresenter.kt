@@ -29,8 +29,13 @@ class SettingPresenter<V: SettingContract.View, I: SettingContract.Interactor>
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var user = dataSnapshot.getValue(Usuario::class.java)
-                var byte = decodeBase64ToByte(user?.foto)
-                getMvpView().setImageUser(decodebase64InBitmap(byte))
+
+                if(user?.foto != null && user?.foto != ""){
+                    var byte = decodeBase64ToByte(user?.foto)
+                    getMvpView().setImageUser(decodebase64InBitmap(byte))
+                }else{
+                    getMvpView().setImageDefault()
+                }
                 getMvpView().setNameUser(user?.nameUser!!)
             }
 

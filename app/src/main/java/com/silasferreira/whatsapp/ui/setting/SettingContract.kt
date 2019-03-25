@@ -17,6 +17,7 @@ interface SettingContract {
     interface View: MvpView{
         fun setImageUser(map: Bitmap)
         fun setNameUser(name: String)
+        fun setImageDefault()
     }
 
     interface Interactor: MvpInteractor{

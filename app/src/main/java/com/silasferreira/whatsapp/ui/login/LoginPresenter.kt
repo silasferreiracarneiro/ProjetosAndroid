@@ -44,7 +44,7 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
         var user = contractInteractor.loggedIn()
         if(user != null){
             prefHelter.setUserId(encode(user.email))
-            prefHelter.setNameUser(user?.displayName!!)
+            //prefHelter.setNameUser(user?.displayName!!)
             getMvpView().goHome()
         }
     }

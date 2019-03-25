@@ -1,4 +1,4 @@
-package com.silasferreira.whatsapp.ui.home
+package com.silasferreira.whatsapp.ui.home.contact
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.utils.Base64Utils
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ListAdapter(var listUsers: List<Usuario>) : RecyclerView.Adapter<ListAdapter.ListAdapterViewHolder>() {
+class ContactAdapter(var listUsers: List<Usuario>) : RecyclerView.Adapter<ContactAdapter.ListAdapterViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListAdapterViewHolder {
@@ -28,7 +28,7 @@ class ListAdapter(var listUsers: List<Usuario>) : RecyclerView.Adapter<ListAdapt
         holder.title.text = user.nome
         holder.subtile.text = user.email
 
-        if(user.foto != null || user.foto == ""){
+        if(user.foto != null && user.foto != ""){
             holder.foto.setImageBitmap(Base64Utils.decodebase64InBitmap(Base64Utils.decodeBase64ToByte(user.foto)))
         }else{
             holder.foto.setImageResource(R.drawable.padrao)

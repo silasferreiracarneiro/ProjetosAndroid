@@ -8,6 +8,9 @@ import com.silasferreira.whatsapp.di.PerActivity
 import com.silasferreira.whatsapp.ui.cadastro.CadastroContract
 import com.silasferreira.whatsapp.ui.cadastro.CadastroInteractor
 import com.silasferreira.whatsapp.ui.cadastro.CadastroPresenter
+import com.silasferreira.whatsapp.ui.chat.ChatContract
+import com.silasferreira.whatsapp.ui.chat.ChatInteractor
+import com.silasferreira.whatsapp.ui.chat.ChatPresenter
 import com.silasferreira.whatsapp.ui.home.HomeContract
 import com.silasferreira.whatsapp.ui.home.HomeInteractor
 import com.silasferreira.whatsapp.ui.home.HomePresenter
@@ -107,6 +110,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideContactInteractor(repository: UsuarioRepository) : ContactContract.Integractor{
         return ContactInteractor(repository)
+    }
+
+    //CHAT
+    @Provides
+    @PerActivity
+    fun provideChatPresenter(interactor: ChatContract.Interactor): ChatContract.Presenter<ChatContract.View, ChatContract.Interactor>{
+        return ChatPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideChatInteractor(repository: UsuarioRepository) : ChatContract.Interactor {
+        return ChatInteractor(repository)
     }
 
     //Repository

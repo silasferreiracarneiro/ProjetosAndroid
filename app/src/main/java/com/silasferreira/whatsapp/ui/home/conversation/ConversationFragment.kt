@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseFragment
-import com.silasferreira.whatsapp.ui.home.ListAdapter
-import kotlinx.android.synthetic.main.fragment_conversation.*
+import com.silasferreira.whatsapp.ui.home.contact.ContactAdapter
 import javax.inject.Inject
 
 class ConversationFragment : BaseFragment(), ConversationContract.View {
@@ -20,7 +19,7 @@ class ConversationFragment : BaseFragment(), ConversationContract.View {
     @Inject lateinit var presenter: ConversationContract.Presenter<ConversationContract.View, ConversationContract.Integractor>
 
     private var listContact: ArrayList<Usuario> = arrayListOf()
-    private var adaper: ListAdapter? = null
+    private var adaper: ContactAdapter? = null
     private var recyler: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,7 +44,7 @@ class ConversationFragment : BaseFragment(), ConversationContract.View {
     override fun setNewListUser(list: ArrayList<Usuario>) {
         this.listContact = list
 
-        adaper = ListAdapter(arrayListOf())
+        adaper = ContactAdapter(arrayListOf())
 
         var layoutManager = LinearLayoutManager(context)
         recyler?.layoutManager = layoutManager

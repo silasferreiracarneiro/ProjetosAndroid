@@ -5,7 +5,6 @@ import android.content.Context
 import com.silasferreira.whatsapp.di.component.ApplicationComponent
 import com.silasferreira.whatsapp.di.component.DaggerApplicationComponent
 import com.silasferreira.whatsapp.di.module.*
-import javax.inject.Inject
 
 class App : Application() {
 

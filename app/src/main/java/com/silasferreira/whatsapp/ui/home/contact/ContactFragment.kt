@@ -15,7 +15,6 @@ import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseFragment
 import com.silasferreira.whatsapp.ui.chat.ChatActivity
-import com.silasferreira.whatsapp.ui.home.ListAdapter
 import javax.inject.Inject
 
 class ContactFragment : BaseFragment(), ContactContract.View  {
@@ -23,7 +22,7 @@ class ContactFragment : BaseFragment(), ContactContract.View  {
     @Inject lateinit var presenter: ContactContract.Presenter<ContactContract.View, ContactContract.Integractor>
 
     private var listContact: ArrayList<Usuario> = arrayListOf()
-    private var adaper: ListAdapter? = null
+    private var adaper: ContactAdapter? = null
     private var recyler: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,8 +36,9 @@ class ContactFragment : BaseFragment(), ContactContract.View  {
         }
 
         recyler = view.findViewById(R.id.recycleContact) as RecyclerView
-        recyler?.addOnItemTouchListener(object: AdapterView.OnItemClickListener, RecyclerView.OnItemTouchListener {
+        recyler?.addOnItemTouchListener(object: RecyclerView.OnItemTouchListener {
             override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                startActivity(Intent(context, ChatActivity::class.java))
             }
 
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
@@ -48,14 +48,7 @@ class ContactFragment : BaseFragment(), ContactContract.View  {
             override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
 
             }
-
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                startActivity(Intent(activity, ChatActivity::class.java))
-            }
-
         })
-
-
         return view
     }
 
@@ -66,7 +59,7 @@ class ContactFragment : BaseFragment(), ContactContract.View  {
     override fun setNewListUser(list: ArrayList<Usuario>) {
         this.listContact = list
 
-        adaper = ListAdapter(listContact)
+        adaper = ContactAdapter(listContact)
 
         var layoutManager = LinearLayoutManager(context)
         recyler?.layoutManager = layoutManager

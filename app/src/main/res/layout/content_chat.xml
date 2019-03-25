@@ -19,20 +19,32 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" android:layout_marginRight="6dp"
+            android:layout_marginLeft="6dp" android:layout_marginBottom="10dp" android:paddingBottom="12dp"
+            android:gravity="center_vertical">
 
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@drawable/found_message_char"
+                android:layout_marginRight="6dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:gravity="center_vertical"
+                android:elevation="2dp" android:layout_marginTop="3dp" android:layout_marginBottom="3dp">
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:text="Name"
                     android:ems="10"
-                    android:id="@+id/editText" android:layout_weight="1"/>
+                    android:id="@+id/editText" android:layout_weight="1" android:background="@color/white"/>
+            <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_photo_camera_gray_24dp"
+                    android:id="@+id/imageView3"/>
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -41,6 +53,7 @@
                 android:clickable="true"
                 android:src="@drawable/ic_send_white_24dp"
                 android:id="@+id/floatingActionButton"
-                android:layout_weight="1"/>
+                app:fabSize="mini"
+                app:backgroundTint="@color/colorPrimary"/>
     </LinearLayout>
 </LinearLayout>
