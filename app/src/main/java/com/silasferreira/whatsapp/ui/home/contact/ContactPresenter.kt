@@ -13,12 +13,15 @@ class ContactPresenter<V: ContactContract.View, I: ContactContract.Integractor>
 
         override fun onViewPrepared() {
                 var listUser: ArrayList<Usuario> = arrayListOf()
+                var currencyUser = interactor.getCurrencyUser()
 
-                val postListener = object : ValueEventListener {
+                val listener = object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 dataSnapshot.children.forEach {
                                         var user = it.getValue(Usuario::class.java)!!
-                                        listUser.add(user)
+                                        if(currencyUser?.email.equals(user.email)){
+                                                listUser.add(user)
+                                        }
                                 }
                                 getMvpView().setNewListUser(listUser)
                         }
@@ -28,6 +31,8 @@ class ContactPresenter<V: ContactContract.View, I: ContactContract.Integractor>
                         }
                 }
 
-                this.contactInteractor.getListUser().addValueEventListener(postListener)
+                this.contactInteractor.getListUser().addValueEventListener(listener!!)
         }
+
+
 }

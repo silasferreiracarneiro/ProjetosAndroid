@@ -6,11 +6,10 @@
     <dist:module dist:instant="true"/>
 
     <uses-feature
-        android:name="android.hardware.camera2"
-        android:required="true"
-    />
+            android:name="android.hardware.camera2"
+            android:required="true"/>
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
@@ -22,15 +21,23 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".ui.chat.ChatActivity"
+                android:label="@string/title_activity_chat"
+                android:parentActivityName=".ui.home.HomeActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
                 android:name=".ui.setting.SettingActivity"
                 android:parentActivityName=".ui.home.HomeActivity"
                 android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.home.HomeActivity"
-                  android:screenOrientation="portrait">
+        <activity
+                android:name=".ui.home.HomeActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.cadastro.CadastroActivity"
-                  android:screenOrientation="portrait">
+        <activity
+                android:name=".ui.cadastro.CadastroActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity android:name=".ui.login.LoginActivity">
             <intent-filter>

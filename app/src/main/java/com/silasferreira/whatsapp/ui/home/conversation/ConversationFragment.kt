@@ -45,7 +45,7 @@ class ConversationFragment : BaseFragment(), ConversationContract.View {
     override fun setNewListUser(list: ArrayList<Usuario>) {
         this.listContact = list
 
-        adaper = ListAdapter(listContact)
+        adaper = ListAdapter(arrayListOf())
 
         var layoutManager = LinearLayoutManager(context)
         recyler?.layoutManager = layoutManager

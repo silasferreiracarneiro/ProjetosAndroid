@@ -1,6 +1,8 @@
 package com.silasferreira.whatsapp.ui.home.contact
 
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.MvpInteractor
 import com.silasferreira.whatsapp.ui.base.MvpPresenter
@@ -17,5 +19,6 @@ interface ContactContract {
 
     interface Integractor : MvpInteractor {
         fun getListUser(): DatabaseReference
+        fun getCurrencyUser(): FirebaseUser?
     }
 }

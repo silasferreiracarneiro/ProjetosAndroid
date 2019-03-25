@@ -3,7 +3,7 @@
  *
  * Smart tab: https://github.com/ogaclejapan/SmartTabLayout
  * Circle image view: https://github.com/hdodenhof/CircleImageView
-* */
+ * */
 
 apply plugin: 'com.android.application'
 

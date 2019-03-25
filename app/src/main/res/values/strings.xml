@@ -15,4 +15,5 @@
         seus contatos do WhatsApp
     </string>
     <string name="name_user_setting">Nome do usuário</string>
+    <string name="title_activity_chat">ChatActivity</string>
 </resources>
