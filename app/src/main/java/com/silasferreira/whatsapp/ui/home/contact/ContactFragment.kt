@@ -15,6 +15,8 @@ import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseFragment
 import com.silasferreira.whatsapp.ui.chat.ChatActivity
+import com.silasferreira.whatsapp.utils.AppConstants.Companion.CHAT_USER
+import com.silasferreira.whatsapp.utils.RecyclerViewItemClickListener
 import javax.inject.Inject
 
 class ContactFragment : BaseFragment(), ContactContract.View  {
@@ -36,19 +38,18 @@ class ContactFragment : BaseFragment(), ContactContract.View  {
         }
 
         recyler = view.findViewById(R.id.recycleContact) as RecyclerView
-        recyler?.addOnItemTouchListener(object: RecyclerView.OnItemTouchListener {
-            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
-                startActivity(Intent(context, ChatActivity::class.java))
-            }
 
-            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                return true
-            }
+        recyler?.addOnItemTouchListener(
+            RecyclerViewItemClickListener(context!!, recyler!!, object : RecyclerViewItemClickListener.OnItemClickListener{
+                override fun onItemClick(view: View, position: Int) {
+                    var i = Intent(context, ChatActivity::class.java)
+                    var user = presenter.getUserSelect(position)
+                    i.putExtra(CHAT_USER, user)
+                    startActivity(i)
+                }
 
-            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-
-            }
-        })
+                override fun onItemLongClick(view: View?, position: Int) { }
+            }))
         return view
     }
 

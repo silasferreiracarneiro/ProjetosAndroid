@@ -2,7 +2,6 @@ package com.silasferreira.whatsapp.ui.home.contact
 
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.MvpInteractor
 import com.silasferreira.whatsapp.ui.base.MvpPresenter
@@ -15,6 +14,7 @@ interface ContactContract {
 
     interface Presenter<V: ContactContract.View, I: ContactContract.Integractor> : MvpPresenter<V, I> {
         fun onViewPrepared()
+        fun getUserSelect(position: Int): Usuario
     }
 
     interface Integractor : MvpInteractor {

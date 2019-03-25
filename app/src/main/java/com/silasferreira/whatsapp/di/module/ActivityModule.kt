@@ -1,7 +1,9 @@
 package com.silasferreira.whatsapp.di.module
 
 import androidx.appcompat.app.AppCompatActivity
+import com.silasferreira.whatsapp.data.network.model.MessageRequest
 import com.silasferreira.whatsapp.data.network.model.UsuarioRequest
+import com.silasferreira.whatsapp.data.network.repository.MessageRepository
 import com.silasferreira.whatsapp.data.network.repository.UsuarioRepository
 import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.di.PerActivity
@@ -121,13 +123,18 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideChatInteractor(repository: UsuarioRepository) : ChatContract.Interactor {
-        return ChatInteractor(repository)
+    fun provideChatInteractor(repositoryMessage: MessageRepository, repositoryUsuario: UsuarioRepository) : ChatContract.Interactor {
+        return ChatInteractor(repositoryMessage, repositoryUsuario)
     }
 
     //Repository
     @Provides
     fun provideUsuarioRepository(prefHelter: PreferencesHelper): UsuarioRepository {
         return UsuarioRequest(prefHelter)
+    }
+
+    @Provides
+    fun provideMessageRepository(): MessageRepository {
+        return MessageRequest()
     }
 }

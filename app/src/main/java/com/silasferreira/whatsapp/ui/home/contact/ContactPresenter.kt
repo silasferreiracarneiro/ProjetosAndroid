@@ -11,8 +11,10 @@ class ContactPresenter<V: ContactContract.View, I: ContactContract.Integractor>
         @Inject constructor(var contactInteractor: I): ContactContract.Presenter<V, I>,
         BasePresenter<V, I>(contactInteractor){
 
+        var listUser: ArrayList<Usuario> = arrayListOf()
+
         override fun onViewPrepared() {
-                var listUser: ArrayList<Usuario> = arrayListOf()
+
                 var currencyUser = interactor.getCurrencyUser()
 
                 val listener = object : ValueEventListener {
@@ -34,5 +36,7 @@ class ContactPresenter<V: ContactContract.View, I: ContactContract.Integractor>
                 this.contactInteractor.getListUser().addValueEventListener(listener!!)
         }
 
-
+        override fun getUserSelect(position: Int): Usuario {
+                return listUser[position]
+        }
 }

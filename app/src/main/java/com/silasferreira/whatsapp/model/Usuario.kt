@@ -1,5 +1,7 @@
 package com.silasferreira.whatsapp.model
 
+import java.io.Serializable
+
 class Usuario(
     var uid: String = "",
     var nome: String = "",
@@ -7,4 +9,4 @@ class Usuario(
     var senha: String = "",
     var foto: String = "",
     var nameUser: String = ""
-)
+) : Serializable
