@@ -1,6 +1,7 @@
 package com.silasferreira.whatsapp.ui.home.conversation
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.silasferreira.whatsapp.R
+import com.silasferreira.whatsapp.model.Conversation
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseFragment
+import com.silasferreira.whatsapp.ui.chat.ChatActivity
 import com.silasferreira.whatsapp.ui.home.contact.ContactAdapter
+import com.silasferreira.whatsapp.utils.AppConstants
+import com.silasferreira.whatsapp.utils.RecyclerViewItemClickListener
 import javax.inject.Inject
 
 class ConversationFragment : BaseFragment(), ConversationContract.View {
 
     @Inject lateinit var presenter: ConversationContract.Presenter<ConversationContract.View, ConversationContract.Integractor>
 
-    private var listContact: ArrayList<Usuario> = arrayListOf()
-    private var adaper: ContactAdapter? = null
+    private var adaper: ConversationAdapter? = null
     private var recyler: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,6 +38,19 @@ class ConversationFragment : BaseFragment(), ConversationContract.View {
 
         recyler = view.findViewById(R.id.recyclerConversation) as RecyclerView
 
+        recyler?.addOnItemTouchListener(
+            RecyclerViewItemClickListener(context!!, recyler!!, object : RecyclerViewItemClickListener.OnItemClickListener{
+                override fun onItemClick(view: View, position: Int) {
+                    var i = Intent(context, ChatActivity::class.java)
+                    var user = presenter.getUserSelect(position)
+                    i.putExtra(AppConstants.CHAT_USER, user)
+                    startActivity(i)
+                }
+
+                override fun onItemLongClick(view: View?, position: Int) { }
+            })
+        )
+
         return view
     }
 
@@ -41,10 +58,8 @@ class ConversationFragment : BaseFragment(), ConversationContract.View {
         presenter.onViewPrepared()
     }
 
-    override fun setNewListUser(list: ArrayList<Usuario>) {
-        this.listContact = list
-
-        adaper = ContactAdapter(arrayListOf())
+    override fun setNewListUser(list: ArrayList<Conversation>) {
+        adaper = ConversationAdapter(list)
 
         var layoutManager = LinearLayoutManager(context)
         recyler?.layoutManager = layoutManager

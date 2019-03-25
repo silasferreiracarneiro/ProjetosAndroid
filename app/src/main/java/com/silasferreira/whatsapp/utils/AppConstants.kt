@@ -12,6 +12,7 @@ class AppConstants {
         //Firebase
         val PATH_USER = "usuarios"
         val PATH_MESSAGE = "mensagens"
+        val PATH_CONVERSATION = "conversas"
 
         val PATH_IMAGE = "imagens"
         val PATH_PROFILE = "perfil"

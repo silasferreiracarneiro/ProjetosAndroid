@@ -1,9 +1,9 @@
 package com.silasferreira.whatsapp.di.module
 
 import androidx.appcompat.app.AppCompatActivity
-import com.silasferreira.whatsapp.data.network.model.MessageRequest
+import com.silasferreira.whatsapp.data.network.model.ConversationRequest
 import com.silasferreira.whatsapp.data.network.model.UsuarioRequest
-import com.silasferreira.whatsapp.data.network.repository.MessageRepository
+import com.silasferreira.whatsapp.data.network.repository.ConversationRepository
 import com.silasferreira.whatsapp.data.network.repository.UsuarioRepository
 import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.di.PerActivity
@@ -97,7 +97,7 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideConversationInteractor(repository: UsuarioRepository) : ConversationContract.Integractor{
+    fun provideConversationInteractor(repository: ConversationRepository) : ConversationContract.Integractor{
         return ConversationInteractor(repository)
     }
 
@@ -123,8 +123,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideChatInteractor(repositoryMessage: MessageRepository, repositoryUsuario: UsuarioRepository) : ChatContract.Interactor {
-        return ChatInteractor(repositoryMessage, repositoryUsuario)
+    fun provideChatInteractor(repositoryConversation: ConversationRepository, repositoryUsuario: UsuarioRepository) : ChatContract.Interactor {
+        return ChatInteractor(repositoryConversation, repositoryUsuario)
     }
 
     //Repository
@@ -134,7 +134,7 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     }
 
     @Provides
-    fun provideMessageRepository(): MessageRepository {
-        return MessageRequest()
+    fun provideConversationRepository(): ConversationRepository {
+        return ConversationRequest()
     }
 }
