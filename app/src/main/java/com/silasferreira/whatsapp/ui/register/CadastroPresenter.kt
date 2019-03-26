@@ -1,4 +1,4 @@
-package com.silasferreira.whatsapp.ui.cadastro
+package com.silasferreira.whatsapp.ui.register
 
 import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener

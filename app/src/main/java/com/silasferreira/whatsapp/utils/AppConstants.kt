@@ -13,6 +13,7 @@ class AppConstants {
         val PATH_USER = "usuarios"
         val PATH_MESSAGE = "mensagens"
         val PATH_CONVERSATION = "conversas"
+        val PATH_GROUPS = "grupos"
 
         val PATH_IMAGE = "imagens"
         val PATH_PROFILE = "perfil"
@@ -21,5 +22,6 @@ class AppConstants {
 
         //INTENT
         var CHAT_USER = "chatContact"
+        var MEMBERS = "menbros"
     }
 }

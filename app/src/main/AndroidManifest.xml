@@ -21,6 +21,24 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".ui.registergroup.RegisterGroupActivity"
+                android:label="@string/title_activity_register_group"
+                android:parentActivityName=".ui.group.GroupActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.silasferreira.whatsapp.ui.group.GroupActivity"/>
+        </activity>
+        <activity
+                android:name=".ui.group.GroupActivity"
+                android:label="@string/title_activity_group"
+                android:parentActivityName=".ui.home.HomeActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.silasferreira.whatsapp.ui.home.HomeActivity"/>
+        </activity>
+        <activity
                 android:name=".ui.chat.ChatActivity"
                 android:label="@string/title_activity_chat"
                 android:parentActivityName=".ui.home.HomeActivity"
@@ -36,7 +54,7 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
-                android:name=".ui.cadastro.CadastroActivity"
+                android:name=".ui.register.CadastroActivity"
                 android:screenOrientation="portrait">
         </activity>
         <activity android:name=".ui.login.LoginActivity">

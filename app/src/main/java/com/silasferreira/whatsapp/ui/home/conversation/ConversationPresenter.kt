@@ -38,4 +38,14 @@ class ConversationPresenter<V: ConversationContract.View, I: ConversationContrac
     override fun getUserSelect(position: Int): Usuario {
         return listConversation[position].usuario
     }
+
+    override fun searchConversation(text: String) {
+        var result = arrayListOf<Conversation>()
+         listConversation.forEach{
+            if(it.usuario.nome.toLowerCase().contains(text.toLowerCase()) || it.lastMessage.toLowerCase().contains(text.toLowerCase())){
+                result.add(it)
+            }
+        }
+        getMvpView().setNewListUser(result)
+    }
 }

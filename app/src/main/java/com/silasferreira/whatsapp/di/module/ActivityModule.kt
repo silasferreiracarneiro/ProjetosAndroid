@@ -7,12 +7,15 @@ import com.silasferreira.whatsapp.data.network.repository.ConversationRepository
 import com.silasferreira.whatsapp.data.network.repository.UsuarioRepository
 import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.di.PerActivity
-import com.silasferreira.whatsapp.ui.cadastro.CadastroContract
-import com.silasferreira.whatsapp.ui.cadastro.CadastroInteractor
-import com.silasferreira.whatsapp.ui.cadastro.CadastroPresenter
+import com.silasferreira.whatsapp.ui.register.CadastroContract
+import com.silasferreira.whatsapp.ui.register.CadastroInteractor
+import com.silasferreira.whatsapp.ui.register.CadastroPresenter
 import com.silasferreira.whatsapp.ui.chat.ChatContract
 import com.silasferreira.whatsapp.ui.chat.ChatInteractor
 import com.silasferreira.whatsapp.ui.chat.ChatPresenter
+import com.silasferreira.whatsapp.ui.group.GroupContract
+import com.silasferreira.whatsapp.ui.group.GroupInteractor
+import com.silasferreira.whatsapp.ui.group.GroupPresenter
 import com.silasferreira.whatsapp.ui.home.HomeContract
 import com.silasferreira.whatsapp.ui.home.HomeInteractor
 import com.silasferreira.whatsapp.ui.home.HomePresenter
@@ -25,6 +28,9 @@ import com.silasferreira.whatsapp.ui.home.conversation.ConversationPresenter
 import com.silasferreira.whatsapp.ui.login.LoginContract
 import com.silasferreira.whatsapp.ui.login.LoginInteractor
 import com.silasferreira.whatsapp.ui.login.LoginPresenter
+import com.silasferreira.whatsapp.ui.registergroup.RegisterGroupContract
+import com.silasferreira.whatsapp.ui.registergroup.RegisterGroupInteractor
+import com.silasferreira.whatsapp.ui.registergroup.RegisterGroupPresenter
 import com.silasferreira.whatsapp.ui.setting.SettingContract
 import com.silasferreira.whatsapp.ui.setting.SettingInteractor
 import com.silasferreira.whatsapp.ui.setting.SettingPresenter
@@ -52,8 +58,9 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     //HOME
     @Provides
     @PerActivity
-    fun providerHomePresenter(interactor: HomeContract.Interactor) : HomeContract.Presenter<HomeContract.View, HomeContract.Interactor>{
-        return HomePresenter(interactor)
+    fun providerHomePresenter(interactor: HomeContract.Interactor,
+                              presenterConversation: ConversationContract.Presenter<ConversationContract.View, ConversationContract.Integractor>) : HomeContract.Presenter<HomeContract.View, HomeContract.Interactor>{
+        return HomePresenter(interactor, presenterConversation)
     }
 
     @Provides
@@ -125,6 +132,32 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideChatInteractor(repositoryConversation: ConversationRepository, repositoryUsuario: UsuarioRepository) : ChatContract.Interactor {
         return ChatInteractor(repositoryConversation, repositoryUsuario)
+    }
+
+    //GROUP
+    @Provides
+    @PerActivity
+    fun provideGroupPresenter(interactor: GroupContract.Interactor): GroupContract.Presenter<GroupContract.View, GroupContract.Interactor>{
+        return GroupPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideGroupInteractor(repositoryUsuario: UsuarioRepository) : GroupContract.Interactor {
+        return GroupInteractor(repositoryUsuario)
+    }
+
+    //REGISTER GROUP
+    @Provides
+    @PerActivity
+    fun provideRegisterGroupPresenter(interactor: RegisterGroupContract.Interactor): RegisterGroupContract.Presenter<RegisterGroupContract.View, RegisterGroupContract.Interactor>{
+        return RegisterGroupPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideRegisterGroupInteractor(repository: ConversationRepository, usuarioRepository: UsuarioRepository) : RegisterGroupContract.Interactor {
+        return RegisterGroupInteractor(repository, usuarioRepository)
     }
 
     //Repository

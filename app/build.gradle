@@ -3,6 +3,7 @@
  *
  * Smart tab: https://github.com/ogaclejapan/SmartTabLayout
  * Circle image view: https://github.com/hdodenhof/CircleImageView
+ * Search View: https://github.com/MiguelCatalan/MaterialSearchView
  * */
 
 apply plugin: 'com.android.application'
@@ -28,6 +29,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            android.defaultConfig.vectorDrawables.useSupportLibrary = true
         }
     }
     compileOptions {

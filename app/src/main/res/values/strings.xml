@@ -16,4 +16,7 @@
     </string>
     <string name="name_user_setting">Nome do usuário</string>
     <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_group">GroupActivity</string>
+    <string name="title_activity_register_group">RegisterGroupActivity</string>
+    <string name="defina_um_nome_ou_uma_imagem_opcional">Defina um nome ou uma imagem opcional</string>
 </resources>

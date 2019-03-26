@@ -3,12 +3,10 @@ package com.silasferreira.whatsapp.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
-import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseActivity
-import com.silasferreira.whatsapp.ui.cadastro.CadastroActivity
+import com.silasferreira.whatsapp.ui.register.CadastroActivity
 import com.silasferreira.whatsapp.ui.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject

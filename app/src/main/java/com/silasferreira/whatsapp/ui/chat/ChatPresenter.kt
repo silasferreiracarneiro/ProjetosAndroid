@@ -48,7 +48,7 @@ class ChatPresenter<V: ChatContract.View, I: ChatContract.Interactor>
 
     override fun saveConversation(conversation: Conversation) {
         var user = chatInteractor.getCurrencyUser()
-        conversation.idRecipient = Base64Utils.encode(user?.email)
+        conversation.idSender = Base64Utils.encode(user?.email)
         chatInteractor.saveConversation(conversation)
     }
 }

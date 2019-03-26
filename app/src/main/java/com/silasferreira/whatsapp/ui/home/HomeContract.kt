@@ -16,5 +16,6 @@ interface HomeContract {
 
     interface Presenter<V: HomeContract.View, I: HomeContract.Interactor>: MvpPresenter<V, I>{
         fun logout()
+        fun searchListConversation(text: String)
     }
 }

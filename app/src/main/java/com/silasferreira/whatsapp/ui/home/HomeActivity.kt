@@ -2,9 +2,12 @@ package com.silasferreira.whatsapp.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.MenuItemCompat
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 import com.silasferreira.whatsapp.R
@@ -47,12 +50,27 @@ class HomeActivity : BaseActivity(), HomeContract.View {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         var inflater = menuInflater
         inflater.inflate(R.menu.menu_home, menu)
+
+        var searchView = MenuItemCompat.getActionView(menu?.findItem(R.id.itemSearch)) as SearchView
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if(newText != null){
+                    presenter.searchListConversation(newText!!)
+                }
+                return false
+            }
+        })
+
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.itemSearch -> ""
             R.id.itemLoggout -> presenter.logout()
             R.id.itemSettings -> getSetting()
         }

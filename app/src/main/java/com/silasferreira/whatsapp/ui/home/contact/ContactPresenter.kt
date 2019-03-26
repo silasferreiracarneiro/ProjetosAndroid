@@ -14,7 +14,7 @@ class ContactPresenter<V: ContactContract.View, I: ContactContract.Integractor>
         var listUser: ArrayList<Usuario> = arrayListOf()
 
         override fun onViewPrepared() {
-
+                listUser.add(Usuario("","Novo Grupo","","","","Novo Grupo"))
                 var currencyUser = interactor.getCurrencyUser()
 
                 val listener = object : ValueEventListener {

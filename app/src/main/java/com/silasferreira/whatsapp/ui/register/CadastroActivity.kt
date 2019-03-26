@@ -1,8 +1,7 @@
-package com.silasferreira.whatsapp.ui.cadastro
+package com.silasferreira.whatsapp.ui.register
 
 import android.os.Bundle
 import android.view.View
-import com.silasferreira.whatsapp.App
 import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseActivity

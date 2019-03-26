@@ -30,6 +30,9 @@ class ContactAdapter(var listUsers: List<Usuario>) : RecyclerView.Adapter<Contac
 
         if(user.foto != null && user.foto != ""){
             holder.foto.setImageBitmap(Base64Utils.decodebase64InBitmap(Base64Utils.decodeBase64ToByte(user.foto)))
+        }else if(user.email.isEmpty()){
+            holder.foto.setImageResource(R.drawable.icone_grupo)
+            holder.subtile.visibility = View.GONE
         }else{
             holder.foto.setImageResource(R.drawable.padrao)
         }
