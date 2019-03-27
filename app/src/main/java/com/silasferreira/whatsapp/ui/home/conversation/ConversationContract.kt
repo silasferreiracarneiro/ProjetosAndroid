@@ -15,7 +15,7 @@ interface ConversationContract {
 
     interface Presenter<V: ConversationContract.View, I: ConversationContract.Integractor> : MvpPresenter<V, I> {
         fun onViewPrepared()
-        fun getUserSelect(position: Int): Usuario
+        fun getUserSelect(position: Int): Conversation
         fun searchConversation(text: String)
     }
 

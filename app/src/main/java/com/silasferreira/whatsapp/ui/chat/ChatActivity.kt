@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.data.prefs.PreferencesHelper
 import com.silasferreira.whatsapp.model.Conversation
+import com.silasferreira.whatsapp.model.Group
 import com.silasferreira.whatsapp.model.MessageUser
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseActivity
+import com.silasferreira.whatsapp.utils.AppConstants.Companion.CHAT_GROUP
 import com.silasferreira.whatsapp.utils.AppConstants.Companion.CHAT_USER
 import com.silasferreira.whatsapp.utils.Base64Utils
 
@@ -29,6 +31,7 @@ class ChatActivity : BaseActivity(), ChatContract.View {
     private val CAMERA = 100
 
     var user: Usuario? = null
+    var group: Group? = null
     var adapter: ChatAdapter? = null
     var listMessages = arrayListOf<MessageUser>()
 
@@ -43,17 +46,27 @@ class ChatActivity : BaseActivity(), ChatContract.View {
         supportActionBar?.title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        user = intent.extras.getSerializable(CHAT_USER) as Usuario?
+        if(intent.extras?.containsKey(CHAT_USER)!!){
+            user = intent.extras.getSerializable(CHAT_USER) as Usuario?
+        }else{
+            group = intent.extras.getSerializable(CHAT_GROUP) as Group?
+        }
         setInformationUser()
 
         fabSubmitMessage.setOnClickListener {
             if(editText?.text?.toString() != null && !editText?.text?.toString().isNullOrEmpty()){
+
                 var message = MessageUser(
                     "",
-                    Base64Utils.encode(user?.email),
+                    "",
                     editText.text.toString())
 
-                presenter.sendMessage(message)
+                if(user != null){
+                    message.recipientUser = Base64Utils.encode(user?.email)
+                    presenter.sendMessage(message)
+                }else{
+                    presenter.sendMessageGroup(message, group!!)
+                }
                 editText?.setText("")
             }
         }
@@ -102,11 +115,17 @@ class ChatActivity : BaseActivity(), ChatContract.View {
 
     private fun setInformationUser(){
         if(user != null){
-
             textNameMessage.text = user?.nameUser
-
             if(user?.foto != null && user?.foto != ""){
                 var byte = Base64Utils.decodeBase64ToByte(user?.foto)
+                imageUserMessage.setImageBitmap(Base64Utils.decodebase64InBitmap(byte))
+            }else{
+                imageUserMessage.setImageResource(R.drawable.padrao)
+            }
+        }else{
+            textNameMessage.text = group?.name
+            if(group?.photo != null && group?.photo != ""){
+                var byte = Base64Utils.decodeBase64ToByte(group?.photo)
                 imageUserMessage.setImageBitmap(Base64Utils.decodebase64InBitmap(byte))
             }else{
                 imageUserMessage.setImageResource(R.drawable.padrao)
@@ -125,17 +144,27 @@ class ChatActivity : BaseActivity(), ChatContract.View {
 
     override fun saveMessage(textConversation: String){
         var conversation  = Conversation(
-            Base64Utils.encode(user?.email),
+            "",
             "",
             textConversation,
-            user!!)
+            Usuario(),
+            Group())
+
+        if(user == null){
+            conversation.groupConversation = true
+            conversation.group = group!!
+        }else{
+            conversation.usuario = user!!
+            conversation.idRecipient = Base64Utils.encode(user?.email)
+        }
 
         presenter.saveConversation(conversation)
     }
 
     override fun onStart() {
         super.onStart()
-        presenter.getMessages(Base64Utils.encode(user?.email))
+        if(user != null){
+            presenter.getMessages(Base64Utils.encode(user?.email))
+        }
     }
-
 }

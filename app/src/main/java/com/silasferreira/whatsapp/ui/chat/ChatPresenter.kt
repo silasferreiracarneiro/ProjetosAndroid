@@ -4,6 +4,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.silasferreira.whatsapp.model.Conversation
+import com.silasferreira.whatsapp.model.Group
 import com.silasferreira.whatsapp.model.MessageUser
 import com.silasferreira.whatsapp.ui.base.BasePresenter
 import com.silasferreira.whatsapp.utils.Base64Utils
@@ -50,5 +51,16 @@ class ChatPresenter<V: ChatContract.View, I: ChatContract.Interactor>
         var user = chatInteractor.getCurrencyUser()
         conversation.idSender = Base64Utils.encode(user?.email)
         chatInteractor.saveConversation(conversation)
+    }
+
+    override fun sendMessageGroup(message: MessageUser, group: Group) {
+        var user = Base64Utils.encode(chatInteractor.getCurrencyUser()?.email)
+
+        group.users.forEach{
+            message.recipientUser = Base64Utils.encode(it.email)
+            message.senderUser = group.id
+            chatInteractor.sendMessage(message)
+            getMvpView().saveMessage(if(message.image != "") "Foto" else message.message)
+        }
     }
 }

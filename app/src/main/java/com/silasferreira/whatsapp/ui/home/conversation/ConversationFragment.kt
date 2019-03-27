@@ -41,9 +41,14 @@ class ConversationFragment : BaseFragment(), ConversationContract.View {
         recyler?.addOnItemTouchListener(
             RecyclerViewItemClickListener(context!!, recyler!!, object : RecyclerViewItemClickListener.OnItemClickListener{
                 override fun onItemClick(view: View, position: Int) {
+                    var conversation = presenter.getUserSelect(position)
                     var i = Intent(context, ChatActivity::class.java)
-                    var user = presenter.getUserSelect(position)
-                    i.putExtra(AppConstants.CHAT_USER, user)
+
+                    if(conversation.groupConversation){
+                        i.putExtra(AppConstants.CHAT_GROUP, conversation.group)
+                    }else{
+                        i.putExtra(AppConstants.CHAT_USER, conversation.usuario)
+                    }
                     startActivity(i)
                 }
 

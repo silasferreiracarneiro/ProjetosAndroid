@@ -35,8 +35,8 @@ class ConversationPresenter<V: ConversationContract.View, I: ConversationContrac
         this.conversationIntegractor.getListConversation().addValueEventListener(postListener)
     }
 
-    override fun getUserSelect(position: Int): Usuario {
-        return listConversation[position].usuario
+    override fun getUserSelect(position: Int): Conversation {
+        return listConversation[position]
     }
 
     override fun searchConversation(text: String) {

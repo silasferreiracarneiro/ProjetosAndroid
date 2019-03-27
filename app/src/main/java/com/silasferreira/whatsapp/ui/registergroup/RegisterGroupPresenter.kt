@@ -17,12 +17,15 @@ class RegisterGroupPresenter<V : RegisterGroupContract.View, I : RegisterGroupCo
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var user = dataSnapshot.getValue(Usuario::class.java)
-                group!!.users.add(user!!)
+                if(user != null){
+                   group!!.users.add(user!!)
+                }
                 registerGroupInteractor.savedGroup(group)
+                getMvpView().onFinish()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                getMvpView().onError("Erro ao buscar a foto!")
+                getMvpView().onError("Erro ao buscar o usuário atual!")
             }
         }
 

@@ -22,6 +22,7 @@ class AppConstants {
 
         //INTENT
         var CHAT_USER = "chatContact"
+        var CHAT_GROUP = "chatGroup"
         var MEMBERS = "menbros"
     }
 }

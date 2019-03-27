@@ -11,7 +11,9 @@ import com.silasferreira.whatsapp.R
 import com.silasferreira.whatsapp.model.Group
 import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BaseActivity
+import com.silasferreira.whatsapp.ui.chat.ChatActivity
 import com.silasferreira.whatsapp.ui.group.GroupAdapter
+import com.silasferreira.whatsapp.utils.AppConstants.Companion.CHAT_GROUP
 import com.silasferreira.whatsapp.utils.AppConstants.Companion.MEMBERS
 import com.silasferreira.whatsapp.utils.Base64Utils
 
@@ -22,7 +24,8 @@ import javax.inject.Inject
 
 class RegisterGroupActivity : BaseActivity(), RegisterGroupContract.View {
 
-    @Inject lateinit var presenter: RegisterGroupContract.Presenter<RegisterGroupContract.View, RegisterGroupContract.Interactor>
+    @Inject
+    lateinit var presenter: RegisterGroupContract.Presenter<RegisterGroupContract.View, RegisterGroupContract.Interactor>
 
     lateinit var adaperUserSelect: GroupAdapter
     var map: Bitmap? = null
@@ -35,16 +38,26 @@ class RegisterGroupActivity : BaseActivity(), RegisterGroupContract.View {
         setContentView(R.layout.activity_register_group)
         setSupportActionBar(toolbarRegister)
 
+        getActivityComponent().inject(this)
+        presenter.onAttach(this)
+
         toolbarRegister.title = "Novo grupo"
         toolbarRegister.subtitle = "Defina o nome"
 
-        var usersMembers = intent.extras?.getSerializable(MEMBERS) as List<Usuario>
+        var usersMembers = intent.extras?.getSerializable(MEMBERS) as ArrayList<Usuario>
         adaperUserSelect = GroupAdapter(usersMembers)
 
+        group = Group(
+            "",
+            "",
+            "",
+            usersMembers
+        )
+
         txtNumberMember.text = "Participantes: ${usersMembers.size}"
+
         fabRegisterGroup.setOnClickListener {
             group!!.name = edtNameGroup.text.toString()
-            group!!.users = usersMembers
             presenter.savedGroup(group!!)
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -82,5 +95,11 @@ class RegisterGroupActivity : BaseActivity(), RegisterGroupContract.View {
         recyclerMembers?.setHasFixedSize(true)
         recyclerMembers?.adapter = adaperUserSelect
         adaperUserSelect?.notifyDataSetChanged()
+    }
+
+    override fun goChatGroup(group: Group) {
+        var i = Intent(this, ChatActivity::class.java)
+        i.putExtra(CHAT_GROUP, group)
+        startActivity(i)
     }
 }

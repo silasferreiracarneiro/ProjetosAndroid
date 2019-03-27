@@ -3,6 +3,7 @@ package com.silasferreira.whatsapp.ui.chat
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.silasferreira.whatsapp.model.Conversation
+import com.silasferreira.whatsapp.model.Group
 import com.silasferreira.whatsapp.model.MessageUser
 import com.silasferreira.whatsapp.ui.base.MvpInteractor
 import com.silasferreira.whatsapp.ui.base.MvpPresenter
@@ -26,5 +27,6 @@ interface ChatContract {
         fun sendMessage(message: MessageUser)
         fun getMessages(idRecipient: String)
         fun saveConversation(conversation: Conversation)
+        fun sendMessageGroup(message: MessageUser, group: Group)
     }
 }

@@ -10,5 +10,5 @@ interface ConversationRepository {
     fun sendMessage(message: MessageUser)
     fun getMessages(idRecipient: String, idSender: String): DatabaseReference
     fun getListConversation(): DatabaseReference
-    fun savedGroup(group: Group): DatabaseReference
+    fun savedGroup(group: Group)
 }

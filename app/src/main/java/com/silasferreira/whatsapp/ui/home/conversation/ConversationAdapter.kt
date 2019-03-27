@@ -25,11 +25,20 @@ class ConversationAdapter (var listConversation: List<Conversation>) : RecyclerV
     override fun onBindViewHolder(holder: ListConversationAdapterViewHolder, position: Int) {
         var conversation = listConversation[position]
 
-        holder.title.text = conversation.usuario.nome
-        holder.subtile.text = conversation.lastMessage
+        if(conversation.groupConversation){
+            holder.title.text = conversation.group.name
+            holder.subtile.text = conversation.lastMessage
+            loadPhoto(conversation.group.photo, holder)
+        }else{
+            holder.title.text = conversation.usuario.nome
+            holder.subtile.text = conversation.lastMessage
+            loadPhoto(conversation.usuario.foto, holder)
+        }
+    }
 
-        if(conversation.usuario.foto != null && conversation.usuario.foto != ""){
-            holder.foto.setImageBitmap(Base64Utils.decodebase64InBitmap(Base64Utils.decodeBase64ToByte(conversation.usuario.foto)))
+    private fun loadPhoto(photo: String, holder: ListConversationAdapterViewHolder){
+        if(photo != null && photo != ""){
+            holder.foto.setImageBitmap(Base64Utils.decodebase64InBitmap(Base64Utils.decodeBase64ToByte(photo)))
         }else{
             holder.foto.setImageResource(R.drawable.padrao)
         }

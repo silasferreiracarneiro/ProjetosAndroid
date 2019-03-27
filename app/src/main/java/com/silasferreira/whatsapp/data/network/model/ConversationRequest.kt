@@ -7,6 +7,7 @@ import com.silasferreira.whatsapp.data.network.repository.ConversationRepository
 import com.silasferreira.whatsapp.model.Conversation
 import com.silasferreira.whatsapp.model.Group
 import com.silasferreira.whatsapp.model.MessageUser
+import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.utils.AppConstants.Companion.PATH_CONVERSATION
 import com.silasferreira.whatsapp.utils.AppConstants.Companion.PATH_GROUPS
 import com.silasferreira.whatsapp.utils.AppConstants.Companion.PATH_MESSAGE
@@ -59,7 +60,23 @@ class ConversationRequest : ConversationRepository {
         return reference.child(PATH_CONVERSATION).child(Base64Utils.encode(auth.currentUser?.email))
     }
 
-    override fun savedGroup(group: Group): DatabaseReference {
-        return reference.child(PATH_GROUPS)
+    override fun savedGroup(group: Group) {
+        group.id = reference.child(PATH_GROUPS).push().key!!
+        reference.child(PATH_GROUPS).child(group.id).setValue(group)
+        savedConversationGroup(group)
+    }
+
+    private fun savedConversationGroup(group: Group){
+        group.users.forEach {
+            var conversation = Conversation(
+                group.id,
+                Base64Utils.encode(it.email),
+                "",
+                it,
+                group,
+                true
+            )
+            saveConversation(conversation)
+        }
     }
 }
