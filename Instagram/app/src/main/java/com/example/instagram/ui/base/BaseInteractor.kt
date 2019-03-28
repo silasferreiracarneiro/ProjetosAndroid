@@ -1,4 +1,6 @@
 package com.example.instagram.ui.base
 
-class BaseInteractor {
+import com.silasferreira.whatsapp.ui.base.MvpInteractor
+
+class BaseInteractor : MvpInteractor {
 }

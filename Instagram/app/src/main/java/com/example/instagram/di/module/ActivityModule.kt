@@ -1,4 +1,9 @@
 package com.example.instagram.di.module
 
-class ActivityModule {
+import androidx.appcompat.app.AppCompatActivity
+import dagger.Module
+
+@Module
+class ActivityModule(appCompatActivity: AppCompatActivity) {
+
 }

@@ -1,4 +1,4 @@
-package com.silasferreira.whatsapp.utils
+package com.example.instagram.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

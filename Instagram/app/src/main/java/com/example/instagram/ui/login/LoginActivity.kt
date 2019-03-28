@@ -1,4 +1,4 @@
-package com.example.instagram.ui
+package com.example.instagram.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
