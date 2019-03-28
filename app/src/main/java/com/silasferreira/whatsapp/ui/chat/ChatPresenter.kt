@@ -6,6 +6,7 @@ import com.google.firebase.database.ValueEventListener
 import com.silasferreira.whatsapp.model.Conversation
 import com.silasferreira.whatsapp.model.Group
 import com.silasferreira.whatsapp.model.MessageUser
+import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.BasePresenter
 import com.silasferreira.whatsapp.utils.Base64Utils
 import javax.inject.Inject
@@ -20,7 +21,42 @@ class ChatPresenter<V: ChatContract.View, I: ChatContract.Interactor>
         var user = chatInteractor.getCurrencyUser()
         message.senderUser = Base64Utils.encode(user?.email)
         chatInteractor.sendMessage(message)
-        getMvpView().saveMessage(if(message.image != "") "Foto" else message.message)
+        savedConversion(if(message.image != "") "Foto" else message.message)
+    }
+
+    override fun sendMessageGroup(message: MessageUser, group: Group) {
+
+        group.users.forEach{
+            message.recipientUser = group.id
+            message.senderUser = Base64Utils.encode(it.email)
+            chatInteractor.sendMessage(message)
+            savedConversion(if(message.image != "") "Foto" else message.message)
+        }
+    }
+
+    private fun savedConversion(message: String){
+        var conversation  = Conversation(
+            "",
+            "",
+            message,
+            Usuario(),
+            Group())
+
+        if(getMvpView().getGroupChat() != null){
+            conversation.groupConversation = true
+            conversation.idRecipient = getMvpView().getGroupChat()?.id!!
+            conversation.group = getMvpView().getGroupChat()!!
+        }else{
+            conversation.usuario = getMvpView().getUserChat()!!
+            conversation.idRecipient = Base64Utils.encode(getMvpView().getUserChat()?.email)
+        }
+        this.saveConversation(conversation)
+    }
+
+    override fun saveConversation(conversation: Conversation) {
+        var user = chatInteractor.getCurrencyUser()
+        conversation.idSender = Base64Utils.encode(user?.email)
+        chatInteractor.saveConversation(conversation)
     }
 
     override fun getMessages(idRecipient: String) {
@@ -45,22 +81,5 @@ class ChatPresenter<V: ChatContract.View, I: ChatContract.Interactor>
 
         chatInteractor.getMessages(idRecipient, Base64Utils.encode(user?.email))
             .addValueEventListener(listener)
-    }
-
-    override fun saveConversation(conversation: Conversation) {
-        var user = chatInteractor.getCurrencyUser()
-        conversation.idSender = Base64Utils.encode(user?.email)
-        chatInteractor.saveConversation(conversation)
-    }
-
-    override fun sendMessageGroup(message: MessageUser, group: Group) {
-        var user = Base64Utils.encode(chatInteractor.getCurrencyUser()?.email)
-
-        group.users.forEach{
-            message.recipientUser = Base64Utils.encode(it.email)
-            message.senderUser = group.id
-            chatInteractor.sendMessage(message)
-            getMvpView().saveMessage(if(message.image != "") "Foto" else message.message)
-        }
     }
 }

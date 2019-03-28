@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseReference
 import com.silasferreira.whatsapp.model.Conversation
 import com.silasferreira.whatsapp.model.Group
 import com.silasferreira.whatsapp.model.MessageUser
+import com.silasferreira.whatsapp.model.Usuario
 import com.silasferreira.whatsapp.ui.base.MvpInteractor
 import com.silasferreira.whatsapp.ui.base.MvpPresenter
 import com.silasferreira.whatsapp.ui.base.MvpView
@@ -13,7 +14,8 @@ interface ChatContract {
 
     interface View : MvpView{
         fun setNewListMessage(messages: ArrayList<MessageUser>)
-        fun saveMessage(message: String)
+        fun getUserChat() : Usuario?
+        fun getGroupChat(): Group?
     }
 
     interface Interactor : MvpInteractor{

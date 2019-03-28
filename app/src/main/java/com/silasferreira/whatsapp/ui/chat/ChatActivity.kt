@@ -142,29 +142,20 @@ class ChatActivity : BaseActivity(), ChatContract.View {
         recyclerMessages.adapter = adapter
     }
 
-    override fun saveMessage(textConversation: String){
-        var conversation  = Conversation(
-            "",
-            "",
-            textConversation,
-            Usuario(),
-            Group())
-
-        if(user == null){
-            conversation.groupConversation = true
-            conversation.group = group!!
-        }else{
-            conversation.usuario = user!!
-            conversation.idRecipient = Base64Utils.encode(user?.email)
-        }
-
-        presenter.saveConversation(conversation)
-    }
-
     override fun onStart() {
         super.onStart()
         if(user != null){
             presenter.getMessages(Base64Utils.encode(user?.email))
+        }else{
+            presenter.getMessages(group?.id!!)
         }
+    }
+
+    override fun getUserChat(): Usuario? {
+        return user
+    }
+
+    override fun getGroupChat(): Group? {
+        return group
     }
 }

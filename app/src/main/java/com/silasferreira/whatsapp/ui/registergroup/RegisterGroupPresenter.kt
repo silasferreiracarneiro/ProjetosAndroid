@@ -21,7 +21,7 @@ class RegisterGroupPresenter<V : RegisterGroupContract.View, I : RegisterGroupCo
                    group!!.users.add(user!!)
                 }
                 registerGroupInteractor.savedGroup(group)
-                getMvpView().onFinish()
+                getMvpView().goChatGroup(group)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
