@@ -3,6 +3,8 @@ package com.example.instagram.di.component
 import android.app.Application
 import android.content.Context
 import com.example.instagram.App
+import com.example.instagram.data.firebase.ConfigFirebaseContract
+import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.di.ApplicationContext
 import com.example.instagram.di.module.ActivityModule
 import com.example.instagram.di.module.ApplicationModule
@@ -21,4 +23,8 @@ interface ApplicationComponent {
     fun context(): Context
 
     fun application(): Application
+
+    fun preferencesHelper(): PreferencesHelper
+
+    fun firebaseConfig(): ConfigFirebaseContract
 }

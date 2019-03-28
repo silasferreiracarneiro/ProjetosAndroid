@@ -6,7 +6,7 @@ import com.silasferreira.whatsapp.ui.base.MvpPresenter
 import com.silasferreira.whatsapp.ui.base.MvpView
 import java.lang.Exception
 
-class BasePresenter<V : MvpView, I : MvpInteractor>(val interactor: I): MvpPresenter<V, I> {
+open class BasePresenter<V : MvpView, I : MvpInteractor>(val interactor: I): MvpPresenter<V, I> {
 
     private lateinit var view: V
 
