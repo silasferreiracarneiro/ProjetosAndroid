@@ -7,4 +7,7 @@
     <string name="e_mail">E-mail</string>
     <string name="usuario">Usuário</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="no_internet">Equipamento sem acesso a internet!</string>
+    <string name="error_create_user">Erro ao criar o usuário!</string>
+    <string name="enter_the_data">Informe todos os dados!</string>
 </resources>

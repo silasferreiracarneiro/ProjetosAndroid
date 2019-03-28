@@ -9,7 +9,6 @@ import com.example.instagram.di.module.ApplicationModule
 class App: Application() {
 
     private lateinit var component: ApplicationComponent
-
     private lateinit var context: Context
 
     override fun onCreate() {

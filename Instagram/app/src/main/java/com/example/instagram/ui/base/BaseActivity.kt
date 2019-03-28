@@ -58,4 +58,8 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
     fun getActivityComponent(): ActivityComponent {
         return mActivityComponent
     }
+
+    override fun onGetString(id: Int): String {
+        return getString(id)
+    }
  }

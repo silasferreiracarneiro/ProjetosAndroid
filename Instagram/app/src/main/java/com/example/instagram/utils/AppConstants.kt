@@ -8,5 +8,7 @@ class AppConstants {
 
         val NULL_INDEX = -1L
 
+        //Firebase
+        val USER = "usuarios"
     }
 }

@@ -13,4 +13,6 @@ interface MvpView {
     abstract fun onError(message: String)
 
     abstract fun onFinish()
+
+    abstract fun onGetString(id: Int): String
 }
