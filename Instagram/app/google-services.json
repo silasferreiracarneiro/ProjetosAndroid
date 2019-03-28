@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "588612177604",
+    "firebase_url": "https://intagram-575b5.firebaseio.com",
+    "project_id": "intagram-575b5",
+    "storage_bucket": "intagram-575b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588612177604:android:760892a4293e91d7",
+        "android_client_info": {
+          "package_name": "com.example.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588612177604-g7567p2fsglq4alhdo1ruba65ahctsbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.instagram",
+            "certificate_hash": "7b942dc6f488aaebf9021fa8767253b222f95f52"
+          }
+        },
+        {
+          "client_id": "588612177604-77qnvrh9d73sn6j50c67af7v21pm02ot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH92dwQ3QSakEHIL2BAZdAUt2Taf8mteI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588612177604-77qnvrh9d73sn6j50c67af7v21pm02ot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
