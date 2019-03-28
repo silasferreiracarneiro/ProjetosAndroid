@@ -5,6 +5,9 @@ import com.example.instagram.data.firebase.ConfigFirebaseContract
 import com.example.instagram.data.network.model.UserRequest
 import com.example.instagram.data.network.repository.UserRepository
 import com.example.instagram.di.PerActivity
+import com.example.instagram.ui.login.LoginContract
+import com.example.instagram.ui.login.LoginInteractor
+import com.example.instagram.ui.login.LoginPresenter
 import com.example.instagram.ui.register.RegisterContract
 import com.example.instagram.ui.register.RegisterInteractor
 import com.example.instagram.ui.register.RegisterPresenter
@@ -26,6 +29,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideRegisterInteractor(userRepository: UserRepository): RegisterContract.Interactor {
         return RegisterInteractor(userRepository)
+    }
+
+    //LOGIN
+    @Provides
+    @PerActivity
+    fun provideLoginPresenter(interactor: LoginContract.Interactor): LoginContract.Presenter<LoginContract.View, LoginContract.Interactor>{
+        return LoginPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideLoginInteractor(userRepository: UserRepository): LoginContract.Interactor{
+        return LoginInteractor(userRepository)
     }
 
     //REPOSITORY

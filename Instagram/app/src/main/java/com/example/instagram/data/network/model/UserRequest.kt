@@ -7,6 +7,7 @@ import com.example.instagram.utils.AppConstants.Companion.USER
 import com.example.instagram.utils.Base64Utils
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseUser
 
 class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
 
@@ -16,5 +17,9 @@ class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
 
     override fun createUser(user: User) {
         firebaseConfig.database().child(USER).child(Base64Utils.encode(user.email)).setValue(user)
+    }
+
+    override fun signIn(): FirebaseUser? {
+        return firebaseConfig.authFirebase().currentUser
     }
 }
