@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Instagram</string>
     <string name="some_error">Some error occurred!</string>
+    <string name="cadastra_se">Cadastra-se</string>
+    <string name="entrar">Entrar</string>
+    <string name="password">Password</string>
+    <string name="e_mail">E-mail</string>
 </resources>
