@@ -11,6 +11,10 @@ import com.google.firebase.auth.FirebaseUser
 
 class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
 
+    override fun signInUser(user: User): Task<AuthResult> {
+        return firebaseConfig.authFirebase().signInWithEmailAndPassword(user.email, user.password)
+    }
+
     override fun createUserInAuthentication(user: User): Task<AuthResult> {
         return firebaseConfig.authFirebase().createUserWithEmailAndPassword(user.email, user.password)
     }
@@ -19,7 +23,7 @@ class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
         firebaseConfig.database().child(USER).child(Base64Utils.encode(user.email)).setValue(user)
     }
 
-    override fun signIn(): FirebaseUser? {
+    override fun loggedIn(): FirebaseUser? {
         return firebaseConfig.authFirebase().currentUser
     }
 }

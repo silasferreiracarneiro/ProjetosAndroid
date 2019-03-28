@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.data.firebase.ConfigFirebaseContract
 import com.example.instagram.data.network.model.UserRequest
 import com.example.instagram.data.network.repository.UserRepository
+import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.di.PerActivity
 import com.example.instagram.ui.login.LoginContract
 import com.example.instagram.ui.login.LoginInteractor
@@ -34,8 +35,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     //LOGIN
     @Provides
     @PerActivity
-    fun provideLoginPresenter(interactor: LoginContract.Interactor): LoginContract.Presenter<LoginContract.View, LoginContract.Interactor>{
-        return LoginPresenter(interactor)
+    fun provideLoginPresenter(interactor: LoginContract.Interactor, prefHelter: PreferencesHelper): LoginContract.Presenter<LoginContract.View, LoginContract.Interactor>{
+        return LoginPresenter(interactor, prefHelter)
     }
 
     @Provides

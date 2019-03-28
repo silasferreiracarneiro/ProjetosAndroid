@@ -8,5 +8,6 @@ import com.google.firebase.auth.FirebaseUser
 interface UserRepository {
     fun createUserInAuthentication(user: User): Task<AuthResult>
     fun createUser(user: User)
-    fun signIn(): FirebaseUser?
+    fun loggedIn(): FirebaseUser?
+    fun signInUser(user: User): Task<AuthResult>
 }
