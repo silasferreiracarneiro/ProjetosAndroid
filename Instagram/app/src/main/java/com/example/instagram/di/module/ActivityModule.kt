@@ -6,6 +6,9 @@ import com.example.instagram.data.network.model.UserRequest
 import com.example.instagram.data.network.repository.UserRepository
 import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.di.PerActivity
+import com.example.instagram.ui.home.HomeContract
+import com.example.instagram.ui.home.HomeInteractor
+import com.example.instagram.ui.home.HomePresenter
 import com.example.instagram.ui.login.LoginContract
 import com.example.instagram.ui.login.LoginInteractor
 import com.example.instagram.ui.login.LoginPresenter
@@ -43,6 +46,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideLoginInteractor(userRepository: UserRepository): LoginContract.Interactor{
         return LoginInteractor(userRepository)
+    }
+
+    //HOME
+    @Provides
+    @PerActivity
+    fun provideHomePresenter(interactor: HomeContract.Interactor): HomeContract.Presenter<HomeContract.View, HomeContract.Interactor>{
+        return HomePresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideHomeInteractor(): HomeContract.Interactor{
+        return HomeInteractor()
     }
 
     //REPOSITORY
