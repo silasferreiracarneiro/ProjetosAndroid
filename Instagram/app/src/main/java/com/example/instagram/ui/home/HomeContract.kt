@@ -7,6 +7,12 @@ import com.silasferreira.whatsapp.ui.base.MvpView
 interface HomeContract {
 
     interface View: MvpView
-    interface Interactor: MvpInteractor
-    interface Presenter<V: HomeContract.View, I: HomeContract.Interactor>: MvpPresenter<V, I>
+
+    interface Interactor: MvpInteractor{
+        fun signOut()
+    }
+
+    interface Presenter<V: HomeContract.View, I: HomeContract.Interactor>: MvpPresenter<V, I>{
+        fun signOut()
+    }
 }

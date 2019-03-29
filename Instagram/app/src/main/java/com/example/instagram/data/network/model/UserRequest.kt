@@ -11,6 +11,10 @@ import com.google.firebase.auth.FirebaseUser
 
 class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
 
+    override fun signOut() {
+        firebaseConfig.authFirebase().signOut()
+    }
+
     override fun signInUser(user: User): Task<AuthResult> {
         return firebaseConfig.authFirebase().signInWithEmailAndPassword(user.email, user.password)
     }

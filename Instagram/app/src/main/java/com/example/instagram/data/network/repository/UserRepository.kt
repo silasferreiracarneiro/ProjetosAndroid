@@ -10,4 +10,5 @@ interface UserRepository {
     fun createUser(user: User)
     fun loggedIn(): FirebaseUser?
     fun signInUser(user: User): Task<AuthResult>
+    fun signOut()
 }

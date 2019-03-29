@@ -57,8 +57,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideHomeInteractor(): HomeContract.Interactor{
-        return HomeInteractor()
+    fun provideHomeInteractor(userRepository: UserRepository): HomeContract.Interactor{
+        return HomeInteractor(userRepository)
     }
 
     //REPOSITORY
