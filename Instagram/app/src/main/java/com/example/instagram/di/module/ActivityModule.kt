@@ -9,9 +9,15 @@ import com.example.instagram.di.PerActivity
 import com.example.instagram.ui.editprofile.EditProfileContract
 import com.example.instagram.ui.editprofile.EditProfileInteractor
 import com.example.instagram.ui.editprofile.EditProfilePresenter
+import com.example.instagram.ui.friendprofile.FriendProfileContract
+import com.example.instagram.ui.friendprofile.FriendProfileInteractor
+import com.example.instagram.ui.friendprofile.FriendProfilePresenter
 import com.example.instagram.ui.home.HomeContract
 import com.example.instagram.ui.home.HomeInteractor
 import com.example.instagram.ui.home.HomePresenter
+import com.example.instagram.ui.home.profile.ProfileContract
+import com.example.instagram.ui.home.profile.ProfileInteractor
+import com.example.instagram.ui.home.profile.ProfilePresenter
 import com.example.instagram.ui.home.search.SearchContract
 import com.example.instagram.ui.home.search.SearchInteractor
 import com.example.instagram.ui.home.search.SearchPresenter
@@ -91,6 +97,32 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideSearchInteractor(repository: UserRepository): SearchContract.Interactor {
         return SearchInteractor(repository)
+    }
+
+    //FRIEND PROFILE
+    @Provides
+    @PerActivity
+    fun provideFriendProfilePresenter(interactor: FriendProfileContract.Interactor): FriendProfileContract.Presenter<FriendProfileContract.View, FriendProfileContract.Interactor>{
+        return FriendProfilePresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideFriendProfileInteractor(repository: UserRepository): FriendProfileContract.Interactor {
+        return FriendProfileInteractor(repository)
+    }
+
+    //PROFILE
+    @Provides
+    @PerActivity
+    fun provideProfilePresenter(interactor: ProfileContract.Interactor): ProfileContract.Presenter<ProfileContract.View, ProfileContract.Interactor>{
+        return ProfilePresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideProfileInteractor(repository: UserRepository): ProfileContract.Interactor {
+        return ProfileInteractor(repository)
     }
 
     //REPOSITORY
