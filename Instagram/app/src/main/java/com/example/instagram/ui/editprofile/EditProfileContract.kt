@@ -20,7 +20,5 @@ interface EditProfileContract {
 
     interface View: MvpView{
         fun setInformationUser(user: User)
-        fun setGoneProgress()
-        fun setProgress()
     }
 }

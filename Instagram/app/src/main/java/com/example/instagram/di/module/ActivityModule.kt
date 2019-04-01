@@ -12,6 +12,9 @@ import com.example.instagram.ui.editprofile.EditProfilePresenter
 import com.example.instagram.ui.home.HomeContract
 import com.example.instagram.ui.home.HomeInteractor
 import com.example.instagram.ui.home.HomePresenter
+import com.example.instagram.ui.home.search.SearchContract
+import com.example.instagram.ui.home.search.SearchInteractor
+import com.example.instagram.ui.home.search.SearchPresenter
 import com.example.instagram.ui.login.LoginContract
 import com.example.instagram.ui.login.LoginInteractor
 import com.example.instagram.ui.login.LoginPresenter
@@ -75,6 +78,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideEditProfileInteractor(repository: UserRepository): EditProfileContract.Interactor{
         return EditProfileInteractor(repository)
+    }
+
+    //SEARCH
+    @Provides
+    @PerActivity
+    fun provideSearchPresenter(interactor: SearchContract.Interactor): SearchContract.Presenter<SearchContract.View, SearchContract.Interactor>{
+        return SearchPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideSearchInteractor(repository: UserRepository): SearchContract.Interactor {
+        return SearchInteractor(repository)
     }
 
     //REPOSITORY

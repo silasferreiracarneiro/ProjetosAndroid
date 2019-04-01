@@ -6,4 +6,6 @@
     <color name="gray_medium">#DBDBDB</color>
     <color name="colorwhite">#FFFFFF</color>
     <color name="blue_dark">#3F51B5</color>
+    <color name="grayMedium">#ebebeb</color>
+    <color name="colorBlack">#000000</color>
 </resources>

@@ -41,6 +41,8 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
         validatedPermissions()
 
+        edtEmailUser.isFocusable = false
+
         btnSaveInfomation.setOnClickListener{
             this.user.nameUser = edtNameUser?.text.toString()
             this.user.photo = photo
@@ -80,6 +82,7 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
         edtNameUser.setText(user.nameUser)
         edtEmailUser.setText(user.email)
         if(user.photo != ""){
+            photo = user.photo
             imgProfileUser.setImageBitmap(decodebase64InBitmap(decodeBase64ToByte(user.photo)))
         }
     }
@@ -89,11 +92,8 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
         presenter.getUser()
     }
 
-    override fun setGoneProgress() {
-        progressBarProfile.visibility = View.GONE
-    }
-
-    override fun setProgress() {
-        progressBarProfile.visibility = View.VISIBLE
+    override fun onSupportNavigateUp(): Boolean {
+        onFinish()
+        return false
     }
 }

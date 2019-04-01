@@ -22,7 +22,7 @@ class RegisterActivity : BaseActivity(), RegisterContract.View {
 
         btnRegister.setOnClickListener{
             var user = User(
-                edtNameUsuario?.text.toString(),
+                edtNameUsuario?.text.toString().toUpperCase(),
                 edtEmailUsuario?.text.toString(),
                 edtPasswordUsuario?.text.toString(),
                 edtNameUsuario?.text.toString(),

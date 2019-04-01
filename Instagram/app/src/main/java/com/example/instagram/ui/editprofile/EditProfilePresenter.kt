@@ -13,6 +13,7 @@ class EditProfilePresenter<V: EditProfileContract.View, I: EditProfileContract.I
 
     override fun updateUser(user: User) {
         interacorProfile.updateUser(user)
+        getMvpView().showMessage("Usuário atualizado!")
         getMvpView().onFinish()
     }
 
