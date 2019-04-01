@@ -58,6 +58,9 @@ class HomeActivity : BaseActivity(), HomeContract.View {
 
     private fun enableNavigation(){
         var navigation = this.findViewById(R.id.bottonNavigation) as BottomNavigationViewEx
+        var transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.viewPager, FeedFragment()).commit()
+
         navigation.setOnNavigationItemReselectedListener {
             var transaction = supportFragmentManager.beginTransaction()
 
