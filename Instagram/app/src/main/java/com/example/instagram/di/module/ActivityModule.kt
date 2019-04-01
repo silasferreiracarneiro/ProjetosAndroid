@@ -15,6 +15,9 @@ import com.example.instagram.ui.friendprofile.FriendProfilePresenter
 import com.example.instagram.ui.home.HomeContract
 import com.example.instagram.ui.home.HomeInteractor
 import com.example.instagram.ui.home.HomePresenter
+import com.example.instagram.ui.home.feed.FeedContract
+import com.example.instagram.ui.home.feed.FeedInteractor
+import com.example.instagram.ui.home.feed.FeedPresenter
 import com.example.instagram.ui.home.posting.PostingContract
 import com.example.instagram.ui.home.posting.PostingInteractor
 import com.example.instagram.ui.home.posting.PostingPresenter
@@ -139,6 +142,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun providePostingInteractor(repository: UserRepository): PostingContract.Interactor {
         return PostingInteractor(repository)
+    }
+
+    //FEED
+    @Provides
+    @PerActivity
+    fun provideFeedPresenter(interactor: FeedContract.Interactor): FeedContract.Presenter<FeedContract.View, FeedContract.Interactor>{
+        return FeedPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideFeedInteractor(repository: UserRepository): FeedContract.Interactor {
+        return FeedInteractor(repository)
     }
 
     //REPOSITORY
