@@ -15,4 +15,8 @@ interface MvpView {
     abstract fun onFinish()
 
     abstract fun onGetString(id: Int): String
+
+    abstract fun alterPermission()
+
+    abstract fun validatedPermissions()
 }

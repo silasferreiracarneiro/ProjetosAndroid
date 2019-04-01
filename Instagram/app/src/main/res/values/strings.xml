@@ -13,4 +13,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="publicacao">Publicações</string>
+    <string name="seguidor">Seguidores</string>
+    <string name="seguindo">Seguindo</string>
+    <string name="number_0">0</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="salvar_informacoes">Salvar Informações</string>
+    <string name="nome_usuario">Nome usuário</string>
+    <string name="alterar_foto">Alterar foto</string>
 </resources>

@@ -24,7 +24,9 @@ class RegisterActivity : BaseActivity(), RegisterContract.View {
             var user = User(
                 edtNameUsuario?.text.toString(),
                 edtEmailUsuario?.text.toString(),
-                edtPasswordUsuario?.text.toString()
+                edtPasswordUsuario?.text.toString(),
+                edtNameUsuario?.text.toString(),
+                ""
             )
             if(NetworkUtils.isNetworkConnected(this)){
                 presenter.createUser(user)

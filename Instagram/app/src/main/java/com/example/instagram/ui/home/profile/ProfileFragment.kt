@@ -1,6 +1,7 @@
 package com.example.instagram.ui.home.profile
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,25 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.instagram.R
+import com.example.instagram.ui.editprofile.EditProfileActivity
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class ProfileFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        view.buttonEdtProfile.setOnClickListener{
+            startActivity(Intent(context, EditProfileActivity::class.java))
+        }
+
+        return view
     }
-
-
 }

@@ -6,6 +6,9 @@ import com.example.instagram.data.network.model.UserRequest
 import com.example.instagram.data.network.repository.UserRepository
 import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.di.PerActivity
+import com.example.instagram.ui.editprofile.EditProfileContract
+import com.example.instagram.ui.editprofile.EditProfileInteractor
+import com.example.instagram.ui.editprofile.EditProfilePresenter
 import com.example.instagram.ui.home.HomeContract
 import com.example.instagram.ui.home.HomeInteractor
 import com.example.instagram.ui.home.HomePresenter
@@ -59,6 +62,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @PerActivity
     fun provideHomeInteractor(userRepository: UserRepository): HomeContract.Interactor{
         return HomeInteractor(userRepository)
+    }
+
+    //EDIT PROFILE
+    @Provides
+    @PerActivity
+    fun provideEditProfilePresenter(interactor: EditProfileContract.Interactor): EditProfileContract.Presenter<EditProfileContract.View, EditProfileContract.Interactor>{
+        return EditProfilePresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideEditProfileInteractor(repository: UserRepository): EditProfileContract.Interactor{
+        return EditProfileInteractor(repository)
     }
 
     //REPOSITORY

@@ -1,8 +1,13 @@
 package com.example.instagram.ui.base
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.instagram.App
 import com.example.instagram.R
 import com.example.instagram.di.component.ActivityComponent
@@ -12,8 +17,10 @@ import com.example.instagram.utils.NetworkUtils
 import com.silasferreira.whatsapp.ui.base.MvpView
 
 abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callback{
+     private lateinit var mActivityComponent: ActivityComponent
 
-    private lateinit var mActivityComponent: ActivityComponent
+    private val awards = arrayListOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+    private val REQUEST_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +62,38 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
      override fun onFragmentDetached(tag: String) {
          TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
      }
+
     fun getActivityComponent(): ActivityComponent {
         return mActivityComponent
     }
 
     override fun onGetString(id: Int): String {
         return getString(id)
+    }
+
+    override fun validatedPermissions() {
+        var arrayRequest = arrayListOf<String>()
+
+        awards.forEach{
+            if(ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED){
+                arrayRequest.add(it)
+            }
+        }
+
+        if(arrayRequest.size > 0){
+            val array = arrayOfNulls<String>(arrayRequest.size)
+            ActivityCompat.requestPermissions(this, arrayRequest.toArray(array), REQUEST_PERMISSION)
+        }
+    }
+
+    override fun alterPermission() {
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle("Permissões negadas")
+        builder.setMessage("Para utilizar o app é necessário aceitar as permissões")
+        builder.setCancelable(false)
+        builder.setPositiveButton("Confirmar"){ dialog, which ->
+            finish()
+        }
+        builder.create().show()
     }
  }

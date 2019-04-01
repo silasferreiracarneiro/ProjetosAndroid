@@ -8,6 +8,7 @@ import com.example.instagram.utils.Base64Utils
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
 
 class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
 
@@ -29,5 +30,9 @@ class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
 
     override fun loggedIn(): FirebaseUser? {
         return firebaseConfig.authFirebase().currentUser
+    }
+
+    override fun getUser(): DatabaseReference {
+        return firebaseConfig.database().child(USER).child(Base64Utils.encode(loggedIn()?.email))
     }
 }
