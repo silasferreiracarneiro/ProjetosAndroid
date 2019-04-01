@@ -24,4 +24,5 @@
                 android:paddingLeft="10dp"
                 android:textStyle="bold"/>
     </LinearLayout>
+    <include layout="@layout/line" />
 </LinearLayout>

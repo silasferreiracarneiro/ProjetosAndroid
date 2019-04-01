@@ -11,5 +11,8 @@ class AppConstants {
         //Firebase
         val USER = "usuarios"
         val USER_NAME = "name"
+
+        //Intent
+        val USER_INTENT = "usuario"
     }
 }

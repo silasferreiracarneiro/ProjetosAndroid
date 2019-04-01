@@ -1,6 +1,7 @@
 package com.example.instagram.ui.home.search
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instagram.R
 import com.example.instagram.model.User
 import com.example.instagram.ui.base.BaseFragment
+import com.example.instagram.ui.friendprofile.FriendProfileActivity
+import com.example.instagram.utils.AppConstants.Companion.USER_INTENT
+import com.example.instagram.utils.RecyclerViewItemClickListener
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import javax.inject.Inject
@@ -47,6 +51,19 @@ class SearchFragment : BaseFragment(), SearchContract.View {
         view.resultSearch.setHasFixedSize(true)
         view.resultSearch.layoutManager = LinearLayoutManager(activity)
 
+        view.resultSearch.addOnItemTouchListener(RecyclerViewItemClickListener(context!!, view.resultSearch, object:RecyclerViewItemClickListener.OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                var user = presenter.getUserList(position)
+                var i = Intent(context!!, FriendProfileActivity::class.java)
+                i.putExtra(USER_INTENT, user)
+                startActivity(i)
+            }
+
+            override fun onItemLongClick(view: View?, position: Int) {
+
+            }
+        }))
+
         return view
     }
 
@@ -55,5 +72,13 @@ class SearchFragment : BaseFragment(), SearchContract.View {
     override fun setListUser(list: ArrayList<User>) {
         view?.resultSearch?.adapter = SearchAdapter(list)
         (view?.resultSearch?.adapter as SearchAdapter).notifyDataSetChanged()
+    }
+
+    override fun setVisibleGoneProgress() {
+        view?.progressBarListUser?.visibility = View.GONE
+    }
+
+    override fun setVisibleProgress() {
+        view?.progressBarListUser?.visibility = View.VISIBLE
     }
 }

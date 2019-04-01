@@ -14,7 +14,7 @@ class SearchPresenter<V: SearchContract.View, I: SearchContract.Interactor>
     var listUsers: ArrayList<User> = arrayListOf()
 
     override fun searchUser(caracter: String?) {
-
+        getMvpView().setVisibleProgress()
         interactorSearch.searchUser(caracter?.toUpperCase()!!).addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 listUsers = arrayListOf()
@@ -22,11 +22,17 @@ class SearchPresenter<V: SearchContract.View, I: SearchContract.Interactor>
                     listUsers.add(it.getValue(User::class.java)!!)
                 }
                 getMvpView().setListUser(listUsers)
+                getMvpView().setVisibleGoneProgress()
             }
 
             override fun onCancelled(p0: DatabaseError) {
                 getMvpView().onError(p0.message )
+                getMvpView().setVisibleGoneProgress()
             }
         })
+    }
+
+    override fun getUserList(position: Int): User {
+        return listUsers[position]
     }
 }

@@ -2,6 +2,7 @@ package com.example.instagram.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.example.instagram.R
 import com.example.instagram.model.User
 import com.example.instagram.ui.base.BaseActivity
@@ -42,5 +43,13 @@ class LoginActivity : BaseActivity(), LoginContract.View {
 
     override fun goToHome() {
         startActivity(Intent(this, HomeActivity::class.java))
+    }
+
+    override fun setVisibleGoneProgress() {
+        progressBarLogin.visibility = View.GONE
+    }
+
+    override fun setVisibleProgress() {
+        progressBarLogin.visibility = View.VISIBLE
     }
 }

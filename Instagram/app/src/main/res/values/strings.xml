@@ -22,4 +22,5 @@
     <string name="nome_usuario">Nome usuário</string>
     <string name="alterar_foto">Alterar foto</string>
     <string name="search_user">Buscar usuários</string>
+    <string name="seguir">Seguir</string>
 </resources>

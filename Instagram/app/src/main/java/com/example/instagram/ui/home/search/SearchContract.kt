@@ -10,6 +10,8 @@ interface SearchContract {
 
     interface View: MvpView{
         fun setListUser(list: ArrayList<User>)
+        fun setVisibleGoneProgress()
+        fun setVisibleProgress()
     }
 
     interface Interactor: MvpInteractor{
@@ -18,5 +20,6 @@ interface SearchContract {
 
     interface Presenter<V: SearchContract.View, I: SearchContract.Interactor>: MvpPresenter<V, I>{
         fun searchUser(caracter: String?)
+        fun getUserList(position: Int): User
     }
 }
