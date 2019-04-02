@@ -2,6 +2,7 @@
  ** CREDITOS **
  *
  * Bottom Navigation: https://github.com/ittianyu/BottomNavigationViewEx
+ * Filters: https://github.com/ravi8x/AndroidPhotoFilters
  * */
 
 apply plugin: 'com.android.application'
@@ -55,11 +56,15 @@ dependencies {
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.0.0'
 
+    //Android Photo Filters
+    implementation 'info.androidhive:imagefilters:1.0.7'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

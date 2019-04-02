@@ -36,8 +36,8 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
         getActivityComponent().inject(this)
         presenter.onAttach(this)
 
-        supportActionBar?.title = "Editar perfil"
         setSupportActionBar(toolbarHome)
+        supportActionBar?.title = getString(R.string.edit_profile)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
         validatedPermissions()

@@ -16,5 +16,6 @@ class AppConstants {
 
         //Intent
         val USER_INTENT = "usuario"
+        val PHOTO_POSTING = "photoposting"
     }
 }

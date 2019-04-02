@@ -17,10 +17,15 @@
     <string name="seguidor">Seguidores</string>
     <string name="seguindo">Seguindo</string>
     <string name="number_0">0</string>
-    <string name="edit_profile">Editar perfil</string>
     <string name="salvar_informacoes">Salvar Informações</string>
     <string name="nome_usuario">Nome usuário</string>
     <string name="alterar_foto">Alterar foto</string>
     <string name="search_user">Buscar usuários</string>
     <string name="seguir">Seguir</string>
+    <string name="open_galery">Abrir Galeria</string>
+    <string name="open_cam">Abrir Câmera</string>
+    <string name="filter">Filtros</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="publish">Publicar</string>
+    <string name="description">Descrição</string>
 </resources>

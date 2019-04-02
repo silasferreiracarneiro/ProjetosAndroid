@@ -16,7 +16,9 @@ import com.silasferreira.whatsapp.ui.base.MvpView
 abstract class BaseFragment : Fragment(), MvpView {
 
     private var mActivity: BaseActivity? = null
-    private val awards = arrayListOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+    private val awards = arrayListOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA, Manifest.permission.INTERNET)
+
     private val REQUEST_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
