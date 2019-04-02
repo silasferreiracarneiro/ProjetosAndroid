@@ -3,14 +3,19 @@ package com.example.instagram.di.module
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.data.firebase.ConfigFirebaseContract
 import com.example.instagram.data.network.model.FollowerRequest
+import com.example.instagram.data.network.model.PostingRequest
 import com.example.instagram.data.network.model.UserRequest
 import com.example.instagram.data.network.repository.FollowerRepository
+import com.example.instagram.data.network.repository.PostingRepository
 import com.example.instagram.data.network.repository.UserRepository
 import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.di.PerActivity
 import com.example.instagram.ui.editprofile.EditProfileContract
 import com.example.instagram.ui.editprofile.EditProfileInteractor
 import com.example.instagram.ui.editprofile.EditProfilePresenter
+import com.example.instagram.ui.filterphoto.FilterPhotoContract
+import com.example.instagram.ui.filterphoto.FilterPhotoInteractor
+import com.example.instagram.ui.filterphoto.FilterPhotoPresenter
 import com.example.instagram.ui.friendprofile.FriendProfileContract
 import com.example.instagram.ui.friendprofile.FriendProfileInteractor
 import com.example.instagram.ui.friendprofile.FriendProfilePresenter
@@ -159,6 +164,19 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
         return FeedInteractor(repository)
     }
 
+    //FILTER PHOTO
+    @Provides
+    @PerActivity
+    fun provideFilterPhotoPresenter(interactor: FilterPhotoContract.Interactor): FilterPhotoContract.Presenter<FilterPhotoContract.View, FilterPhotoContract.Interactor>{
+        return FilterPhotoPresenter(interactor)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideFilterPhotoInteractor(repository: PostingRepository): FilterPhotoContract.Interactor {
+        return FilterPhotoInteractor(repository)
+    }
+
     //REPOSITORY
     @Provides
     fun provideUserRepository(firebaseConfig: ConfigFirebaseContract): UserRepository{
@@ -168,5 +186,10 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @Provides
     fun provideFollowerRepository(firebaseConfig: ConfigFirebaseContract): FollowerRepository {
         return FollowerRequest(firebaseConfig)
+    }
+
+    @Provides
+    fun providePostingRepository(firebaseConfig: PostingRepository): PostingRepository {
+        return PostingRequest(firebaseConfig)
     }
 }

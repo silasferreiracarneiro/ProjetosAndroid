@@ -1,13 +1,13 @@
 package com.example.instagram.ui.filterphoto
 
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.instagram.R
+import com.example.instagram.model.Posting
 import com.example.instagram.ui.base.BaseActivity
 import com.example.instagram.utils.AppConstants
 import com.example.instagram.utils.Base64Utils
@@ -17,12 +17,15 @@ import com.zomato.photofilters.utils.ThumbnailItem
 import com.zomato.photofilters.utils.ThumbnailsManager
 import kotlinx.android.synthetic.main.activity_filter_photo.*
 import kotlinx.android.synthetic.main.toolbar.*
+import javax.inject.Inject
 
-class FilterPhotoActivity : BaseActivity() {
+class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
 
     init {
         System.loadLibrary("NativeImageProcessor")
     }
+
+    @Inject lateinit var presenter: FilterPhotoContract.Presenter<FilterPhotoContract.View, FilterPhotoContract.Interactor>
 
     private var filters: ArrayList<ThumbnailItem> = arrayListOf()
     private var image: Bitmap? = null
@@ -30,6 +33,9 @@ class FilterPhotoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter_photo)
+
+        getActivityComponent().inject(this)
+        presenter.onAttach(this)
 
         setSupportActionBar(toolbarHome)
         toolbarHome.title = getString(R.string.filter)
@@ -66,7 +72,11 @@ class FilterPhotoActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId){
-            R.id.publishPhoto -> ""
+            R.id.publishPhoto -> {
+                var posting = Posting(
+
+                )
+            }
         }
 
         return super.onOptionsItemSelected(item)
