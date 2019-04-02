@@ -114,10 +114,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/qtSeguidor"
             android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/txtSeguidor"
-            app:layout_constraintEnd_toEndOf="@+id/txtSeguidor"/>
+            app:layout_constraintEnd_toEndOf="@+id/txtSeguidor"
+            app:layout_constraintStart_toStartOf="@+id/txtSeguidor" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
             android:text="@string/number_0"
             android:layout_width="wrap_content"

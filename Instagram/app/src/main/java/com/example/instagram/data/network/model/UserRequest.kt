@@ -11,8 +11,14 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
+import com.google.firebase.storage.UploadTask
 
 class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
+
+    override fun uploadImageUser(photo: ByteArray): UploadTask {
+        return firebaseConfig.storage().reference
+            .child("images/profile/user/${Base64Utils.encode(loggedIn()?.email)}.jpg").putBytes(photo)
+    }
 
     override fun signOut() {
         firebaseConfig.authFirebase().signOut()
@@ -36,6 +42,10 @@ class UserRequest(var firebaseConfig: ConfigFirebaseContract): UserRepository {
 
     override fun getUser(): DatabaseReference {
         return firebaseConfig.database().child(USER).child(Base64Utils.encode(loggedIn()?.email))
+    }
+
+    override fun getUserKey(email: String): DatabaseReference{
+        return firebaseConfig.database().child(USER).child(Base64Utils.encode(email))
     }
 
     override fun searchUser(caracter: String): Query {

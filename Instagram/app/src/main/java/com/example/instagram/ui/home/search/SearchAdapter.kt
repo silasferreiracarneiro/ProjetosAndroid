@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.model.User
-import com.example.instagram.utils.Base64Utils.decodeBase64ToByte
-import com.example.instagram.utils.Base64Utils.decodebase64InBitmap
 import de.hdodenhof.circleimageview.CircleImageView
 
-class SearchAdapter(var list: ArrayList<User>): RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter(var list: ArrayList<User>):
+    RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.adapter_list_user_search, parent, false)
@@ -30,7 +30,7 @@ class SearchAdapter(var list: ArrayList<User>): RecyclerView.Adapter<SearchAdapt
 
     private fun loadPhoto(photo: String, holder: SearchViewHolder){
         if(photo != null && photo != ""){
-            holder.photo.setImageBitmap(decodebase64InBitmap(decodeBase64ToByte(photo)))
+            Glide.with(holder.itemView.context).load(photo).into(holder.photo)
         }else{
             holder.photo.setImageResource(R.drawable.padrao)
         }

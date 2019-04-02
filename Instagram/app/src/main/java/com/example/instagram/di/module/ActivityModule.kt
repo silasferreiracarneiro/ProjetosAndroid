@@ -2,7 +2,9 @@ package com.example.instagram.di.module
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.data.firebase.ConfigFirebaseContract
+import com.example.instagram.data.network.model.FollowerRequest
 import com.example.instagram.data.network.model.UserRequest
+import com.example.instagram.data.network.repository.FollowerRepository
 import com.example.instagram.data.network.repository.UserRepository
 import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.di.PerActivity
@@ -114,8 +116,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideFriendProfileInteractor(repository: UserRepository): FriendProfileContract.Interactor {
-        return FriendProfileInteractor(repository)
+    fun provideFriendProfileInteractor(repository: UserRepository, followerRepository: FollowerRepository): FriendProfileContract.Interactor {
+        return FriendProfileInteractor(repository, followerRepository)
     }
 
     //PROFILE
@@ -161,5 +163,10 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @Provides
     fun provideUserRepository(firebaseConfig: ConfigFirebaseContract): UserRepository{
         return UserRequest(firebaseConfig)
+    }
+
+    @Provides
+    fun provideFollowerRepository(firebaseConfig: ConfigFirebaseContract): FollowerRepository {
+        return FollowerRequest(firebaseConfig)
     }
 }

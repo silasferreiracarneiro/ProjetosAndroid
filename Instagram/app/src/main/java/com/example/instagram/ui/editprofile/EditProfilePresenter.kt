@@ -12,9 +12,18 @@ class EditProfilePresenter<V: EditProfileContract.View, I: EditProfileContract.I
     BasePresenter<V, I>(interacorProfile), EditProfileContract.Presenter<V, I> {
 
     override fun updateUser(user: User) {
-        interacorProfile.updateUser(user)
-        getMvpView().showMessage("Usuário atualizado!")
-        getMvpView().onFinish()
+
+        interacorProfile.uploadImage(getMvpView().getImageSelect())
+            .addOnFailureListener{
+                getMvpView().showMessage("Erro ao atualizado o usuário!")
+        }.addOnSuccessListener {
+                it.metadata!!.reference!!.downloadUrl!!.addOnSuccessListener {uri ->
+                    user.photo = uri.toString()
+                    interacorProfile.updateUser(user)
+                    getMvpView().showMessage("Usuário atualizado!")
+                    getMvpView().onFinish()
+                }
+        }
     }
 
     override fun getUser() {

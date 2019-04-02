@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.model.User
 import com.example.instagram.ui.base.BaseActivity
@@ -26,7 +27,7 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
 
     private val GALERY_CODE = 200
     private var user = User()
-    private var photo: String = ""
+    private var photo: ByteArray? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,6 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
 
         btnSaveInfomation.setOnClickListener{
             this.user.nameUser = edtNameUser?.text.toString()
-            this.user.photo = photo
             presenter.updateUser(this.user)
         }
 
@@ -72,7 +72,7 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
         if(map != null){
             var baos = ByteArrayOutputStream()
             map?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            photo = Base64Utils.encodeByte(baos.toByteArray())
+            photo = baos.toByteArray()
             imgProfileUser.setImageBitmap(map)
         }
     }
@@ -82,8 +82,7 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
         edtNameUser.setText(user.nameUser)
         edtEmailUser.setText(user.email)
         if(user.photo != ""){
-            photo = user.photo
-            imgProfileUser.setImageBitmap(decodebase64InBitmap(decodeBase64ToByte(user.photo)))
+            Glide.with(this).load(user.photo).into(imgProfileUser)
         }
     }
 
@@ -95,5 +94,9 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
     override fun onSupportNavigateUp(): Boolean {
         onFinish()
         return false
+    }
+
+    override fun getImageSelect(): ByteArray {
+        return this.photo!!
     }
 }
