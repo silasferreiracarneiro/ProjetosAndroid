@@ -17,17 +17,20 @@ class ProfilePresenter<V: ProfileContract.View, I: ProfileContract.Interactor>
     var user: User? = null
 
     override fun getUser() {
-
+        getMvpView().showLoading()
         interactor.getUser().addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) = if(p0.exists()){
                 user = p0.getValue(User::class.java)!!
                 getMvpView().setUser(user!!)
+                getMvpView().hideLoading()
             }else{
                 getMvpView().onError(R.string.error_load_user)
+                getMvpView().hideLoading()
             }
 
             override fun onCancelled(p0: DatabaseError) {
                 getMvpView().onError(R.string.error_load_user)
+                getMvpView().hideLoading()
             }
         })
     }

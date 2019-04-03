@@ -24,5 +24,6 @@ interface FilterPhotoContract {
         fun savedPhoto(photo: ByteArray?, identity: String): UploadTask
         fun getUser(): DatabaseReference
         fun updateUser(user: User)
+        fun getAllFollowing(idUser: String): DatabaseReference?
     }
 }

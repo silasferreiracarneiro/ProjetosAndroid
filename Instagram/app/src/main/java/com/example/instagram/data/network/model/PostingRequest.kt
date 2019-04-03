@@ -3,6 +3,7 @@ package com.example.instagram.data.network.model
 import com.example.instagram.data.firebase.ConfigFirebaseContract
 import com.example.instagram.data.network.repository.PostingRepository
 import com.example.instagram.model.Posting
+import com.example.instagram.utils.AppConstants.Companion.FEED
 import com.example.instagram.utils.AppConstants.Companion.POSTING
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.UploadTask
@@ -19,6 +20,13 @@ class PostingRequest(var firebaseConfig: ConfigFirebaseContract): PostingReposit
     }
 
     override fun publishPhoto(publish: Posting) {
-        firebaseConfig.database().child(POSTING).child(publish.idUser).child(publish.id).setValue(publish)
+        var map = mutableMapOf<String, Any>()
+
+        var url = "/${publish.idUser}/${publish.id}"
+
+        map["$POSTING/$url"] = publish
+        map["$FEED/$url"] = publish
+
+        firebaseConfig.database().updateChildren(map)
     }
 }

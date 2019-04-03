@@ -12,6 +12,10 @@ class FriendProfileInteractor(var repository: UserRepository,
                               var followerRepository: FollowerRepository,
                               var postingRepository: PostingRepository): BaseInteractor(), FriendProfileContract.Interactor {
 
+    override fun savedFolloweres(follower: Follower) {
+        followerRepository.savedFolloweres(follower)
+    }
+
     override fun getUserKey(email: String): DatabaseReference {
         return repository.getUserKey(email)
     }
@@ -35,4 +39,6 @@ class FriendProfileInteractor(var repository: UserRepository,
     override fun getAllPosting(identify: String): DatabaseReference {
         return postingRepository.getAllPosting(identify)
     }
+
+
 }

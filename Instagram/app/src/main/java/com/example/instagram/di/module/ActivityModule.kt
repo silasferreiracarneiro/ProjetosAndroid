@@ -2,9 +2,11 @@ package com.example.instagram.di.module
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagram.data.firebase.ConfigFirebaseContract
+import com.example.instagram.data.network.model.FeedRequest
 import com.example.instagram.data.network.model.FollowerRequest
 import com.example.instagram.data.network.model.PostingRequest
 import com.example.instagram.data.network.model.UserRequest
+import com.example.instagram.data.network.repository.FeedRepository
 import com.example.instagram.data.network.repository.FollowerRepository
 import com.example.instagram.data.network.repository.PostingRepository
 import com.example.instagram.data.network.repository.UserRepository
@@ -173,8 +175,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideFilterPhotoInteractor(repository: PostingRepository, repositoryUser: UserRepository): FilterPhotoContract.Interactor {
-        return FilterPhotoInteractor(repository, repositoryUser)
+    fun provideFilterPhotoInteractor(repository: PostingRepository, repositoryUser: UserRepository, repositoryFollowerRepository: FollowerRepository): FilterPhotoContract.Interactor {
+        return FilterPhotoInteractor(repository, repositoryUser, repositoryFollowerRepository)
     }
 
     //REPOSITORY
@@ -191,5 +193,10 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     @Provides
     fun providePostingRepository(firebaseConfig: ConfigFirebaseContract): PostingRepository {
         return PostingRequest(firebaseConfig)
+    }
+
+    @Provides
+    fun provideFeedRepository(firebaseConfig: ConfigFirebaseContract): FeedRepository {
+        return FeedRequest(firebaseConfig)
     }
 }

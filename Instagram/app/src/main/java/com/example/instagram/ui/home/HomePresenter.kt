@@ -8,6 +8,7 @@ class HomePresenter<V: HomeContract.View, I: HomeContract.Interactor>
     BasePresenter<V, I>(homeInteractor), HomeContract.Presenter<V, I> {
 
     override fun signOut() {
+        getMvpView().hideLoading()
         interactor.signOut()
         getMvpView().onFinish()
     }

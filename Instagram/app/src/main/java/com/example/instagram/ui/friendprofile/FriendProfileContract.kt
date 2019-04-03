@@ -28,6 +28,7 @@ interface FriendProfileContract {
         fun getUser(): DatabaseReference
         fun upadteUser(user: User)
         fun savedFollower(follower: Follower)
+        fun savedFolloweres(follower: Follower)
         fun getUserKey(email: String): DatabaseReference
         fun getAllPosting(identify: String): DatabaseReference
     }

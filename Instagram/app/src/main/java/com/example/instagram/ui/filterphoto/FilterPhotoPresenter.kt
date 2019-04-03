@@ -42,6 +42,8 @@ class FilterPhotoPresenter<V: FilterPhotoContract.View, I: FilterPhotoContract.I
                 publish.idUser = Base64Utils.encode(user?.email)
                 interactor.publishPhoto(publish)
                 interactorPhoto.updateUser(user)
+                //sendFeedAllFriends(Base64Utils.encode(user?.email))
+
                 getMvpView().showMessage("Postagem feita com sucesso!")
                 getMvpView().hideLoading()
                 getMvpView().onFinish()
@@ -49,7 +51,18 @@ class FilterPhotoPresenter<V: FilterPhotoContract.View, I: FilterPhotoContract.I
         })
     }
 
-    private fun updateUser(identity: String){
+    private fun sendFeedAllFriends(idUser: String){
+        interactorPhoto.getAllFollowing(idUser)?.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                p0.children.forEach{
+                    var user = it.getValue(User::class.java)
+                }
 
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                getMvpView().showMessage("Erro ao enviar o feed, para seus usuários!")
+            }
+        })
     }
 }

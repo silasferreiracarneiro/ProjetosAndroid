@@ -65,6 +65,8 @@ class FriendProfilePresenter<V: FriendProfileContract.View, I: FriendProfileCont
                 interactorFriend.upadteUser(user)
                 interactorFriend.upadteUser(follower.user)
 
+                interactorFriend.savedFolloweres(follower)
+
                 getMvpView().setTextButtonFollowing(getMvpView().onGetString(R.string.seguindo), false)
             }
 
