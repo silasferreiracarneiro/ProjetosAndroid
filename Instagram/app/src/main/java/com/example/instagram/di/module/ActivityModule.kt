@@ -134,8 +134,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideProfileInteractor(repository: UserRepository): ProfileContract.Interactor {
-        return ProfileInteractor(repository)
+    fun provideProfileInteractor(repository: UserRepository, postingRepository: PostingRepository): ProfileContract.Interactor {
+        return ProfileInteractor(repository, postingRepository)
     }
 
     //POSTING

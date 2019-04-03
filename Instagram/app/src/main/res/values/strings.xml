@@ -28,4 +28,5 @@
     <string name="edit_profile">Editar perfil</string>
     <string name="publish">Publicar</string>
     <string name="description">Descrição</string>
+    <string name="error_load_user">Erro ao carregar o perfil!</string>
 </resources>
