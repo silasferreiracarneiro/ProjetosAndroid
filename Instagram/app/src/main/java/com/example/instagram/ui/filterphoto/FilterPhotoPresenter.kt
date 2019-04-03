@@ -31,11 +31,19 @@ class FilterPhotoPresenter<V: FilterPhotoContract.View, I: FilterPhotoContract.I
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                publish.idUser = Base64Utils.encode(p0.getValue(User::class.java)?.email)
+                var user = p0.getValue(User::class.java)
+                user?.qtPosting  = user?.qtPosting!! + 1
+
+                publish.idUser = Base64Utils.encode(user?.email)
                 interactor.publishPhoto(publish)
+                interactorPhoto.updateUser(user)
                 getMvpView().showMessage("Postagem feita com sucesso!")
                 getMvpView().onFinish()
             }
         })
+    }
+
+    private fun updateUser(identity: String){
+
     }
 }

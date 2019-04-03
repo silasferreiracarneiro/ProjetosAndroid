@@ -1,6 +1,7 @@
 package com.example.instagram.ui.filterphoto
 
 import com.example.instagram.model.Posting
+import com.example.instagram.model.User
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.UploadTask
 import com.silasferreira.whatsapp.ui.base.MvpInteractor
@@ -22,5 +23,6 @@ interface FilterPhotoContract {
         fun publishPhoto(publish: Posting)
         fun savedPhoto(photo: ByteArray?, identity: String): UploadTask
         fun getUser(): DatabaseReference
+        fun updateUser(user: User)
     }
 }
