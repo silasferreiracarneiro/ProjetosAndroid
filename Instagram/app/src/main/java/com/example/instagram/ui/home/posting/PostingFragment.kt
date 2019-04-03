@@ -82,9 +82,10 @@ class PostingFragment : BaseFragment(), PostingContract.View {
                 map?.compress(Bitmap.CompressFormat.JPEG, 50, baos)
                 var byte = baos.toByteArray()
 
-                var i = Intent(activity, FilterPhotoActivity::class.java)
+                var i = Intent(context!!, FilterPhotoActivity::class.java)
                 i.putExtra(PHOTO_POSTING, byte)
                 startActivity(i)
+
             }catch (e:Exception){
                 e.printStackTrace()
             }

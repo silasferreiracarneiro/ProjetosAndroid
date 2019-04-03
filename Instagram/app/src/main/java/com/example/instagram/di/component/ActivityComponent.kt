@@ -23,8 +23,8 @@ interface ActivityComponent {
     fun inject(activity: LoginActivity)
     fun inject(activity: HomeActivity)
     fun inject(activity: EditProfileActivity)
-    fun inject(activity: FriendProfileActivity)
     fun inject(activity: FilterPhotoActivity)
+    fun inject(activity: FriendProfileActivity)
 
     fun inject(fragment: SearchFragment)
     fun inject(fragment: ProfileFragment)

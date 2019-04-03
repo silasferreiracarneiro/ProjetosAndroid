@@ -189,7 +189,7 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     }
 
     @Provides
-    fun providePostingRepository(firebaseConfig: PostingRepository): PostingRepository {
+    fun providePostingRepository(firebaseConfig: ConfigFirebaseContract): PostingRepository {
         return PostingRequest(firebaseConfig)
     }
 }

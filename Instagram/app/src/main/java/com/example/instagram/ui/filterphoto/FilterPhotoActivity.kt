@@ -21,11 +21,11 @@ import javax.inject.Inject
 
 class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
 
+    @Inject lateinit var presenter: FilterPhotoContract.Presenter<FilterPhotoContract.View, FilterPhotoContract.Interactor>
+
     init {
         System.loadLibrary("NativeImageProcessor")
     }
-
-    @Inject lateinit var presenter: FilterPhotoContract.Presenter<FilterPhotoContract.View, FilterPhotoContract.Interactor>
 
     private var filters: ArrayList<ThumbnailItem> = arrayListOf()
     private var image: Bitmap? = null
