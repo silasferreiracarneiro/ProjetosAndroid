@@ -2,6 +2,7 @@ package com.example.instagram.ui.base
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -13,11 +14,15 @@ import com.example.instagram.R
 import com.example.instagram.di.component.ActivityComponent
 import com.example.instagram.di.component.DaggerActivityComponent
 import com.example.instagram.di.module.ActivityModule
+import com.example.instagram.utils.CommonUtils
 import com.example.instagram.utils.NetworkUtils
 import com.silasferreira.whatsapp.ui.base.MvpView
 
 abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callback{
-     private lateinit var mActivityComponent: ActivityComponent
+
+    private var mProgressDialog: ProgressDialog? = null
+
+    private lateinit var mActivityComponent: ActivityComponent
 
     private val awards = arrayListOf(Manifest.permission.READ_EXTERNAL_STORAGE)
     private val REQUEST_PERMISSION = 1
@@ -29,6 +34,17 @@ abstract class BaseActivity : AppCompatActivity(), MvpView, BaseFragment.Callbac
             .activityModule(ActivityModule(this))
             .applicationComponent((application as App).getComponent())
             .build()
+    }
+
+    override fun hideLoading() {
+        if (mProgressDialog != null && mProgressDialog?.isShowing!!) {
+            mProgressDialog?.cancel()
+        }
+    }
+
+    override fun showLoading() {
+        hideLoading()
+        mProgressDialog = CommonUtils().showLoadingDialog(this)
     }
 
      override fun showMessage(message: String) {

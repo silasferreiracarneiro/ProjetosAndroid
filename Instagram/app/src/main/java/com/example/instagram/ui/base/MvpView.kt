@@ -4,6 +4,10 @@ import androidx.annotation.StringRes
 
 interface MvpView {
 
+    abstract fun showLoading()
+
+    abstract fun hideLoading()
+
     abstract fun showMessage(message: String)
 
     abstract fun isNetworkConnected(): Boolean

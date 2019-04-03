@@ -12,8 +12,6 @@ interface LoginContract {
 
     interface View: MvpView{
         fun goToHome()
-        fun setVisibleGoneProgress()
-        fun setVisibleProgress()
     }
 
     interface Interactor: MvpInteractor{

@@ -17,12 +17,12 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
         if(user.email == "" || user.password == ""){
             getMvpView().onError(R.string.enter_the_data)
         }else{
-            getMvpView().setVisibleProgress()
+            getMvpView().showLoading()
             interactorLogin.signInUser(user).addOnCompleteListener{
                 if(it.isSuccessful){
                     getMvpView().goToHome()
                 }else{
-                    getMvpView().setVisibleGoneProgress()
+                    getMvpView().hideLoading()
                     var message = when (it.exception){
                         is FirebaseAuthInvalidCredentialsException -> "Usuário não cadastrado!"
                         is FirebaseAuthInvalidUserException -> "Usuário inválido!"
@@ -31,11 +31,11 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
                     }
                     it.exception?.printStackTrace()
                     getMvpView().showMessage(message)
-                    getMvpView().setVisibleGoneProgress()
+                    getMvpView().hideLoading()
                 }
             }.addOnFailureListener{
                 getMvpView().onError(R.string.some_error)
-                getMvpView().setVisibleGoneProgress()
+                getMvpView().hideLoading()
             }
         }
     }

@@ -2,6 +2,7 @@ package com.example.instagram.ui.base
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -10,12 +11,15 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.instagram.di.component.ActivityComponent
+import com.example.instagram.utils.CommonUtils
 import com.example.instagram.utils.NetworkUtils
 import com.silasferreira.whatsapp.ui.base.MvpView
 
 abstract class BaseFragment : Fragment(), MvpView {
 
     private var mActivity: BaseActivity? = null
+    private var mProgressDialog: ProgressDialog? = null
+
     private val awards = arrayListOf(Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.CAMERA, Manifest.permission.INTERNET)
 
@@ -37,6 +41,17 @@ abstract class BaseFragment : Fragment(), MvpView {
             this.mActivity = context
             context.onFragmentAttached()
         }
+    }
+
+    override fun hideLoading() {
+        if (mProgressDialog != null && mProgressDialog?.isShowing!!) {
+            mProgressDialog?.cancel()
+        }
+    }
+
+    override fun showLoading() {
+        hideLoading()
+        mProgressDialog = CommonUtils().showLoadingDialog(context!!)
     }
 
     override fun isNetworkConnected(): Boolean {

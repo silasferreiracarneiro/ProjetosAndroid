@@ -44,12 +44,4 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     override fun goToHome() {
         startActivity(Intent(this, HomeActivity::class.java))
     }
-
-    override fun setVisibleGoneProgress() {
-        progressBarLogin.visibility = View.GONE
-    }
-
-    override fun setVisibleProgress() {
-        progressBarLogin.visibility = View.VISIBLE
-    }
 }

@@ -14,20 +14,25 @@ class FilterPhotoPresenter<V: FilterPhotoContract.View, I: FilterPhotoContract.I
     BasePresenter<V, I>(interactorPhoto), FilterPhotoContract.Presenter<V, I> {
 
     override fun savedPhoto(photo: ByteArray?, identity: String) {
+        getMvpView().showLoading()
         interactorPhoto.savedPhoto(photo, identity).addOnFailureListener{
             getMvpView().showMessage("Erro ao atualizado o usuário!")
+            getMvpView().hideLoading()
         }.addOnSuccessListener {
             it.metadata!!.reference!!.downloadUrl!!.addOnSuccessListener {uri ->
                 getMvpView().savedPosting(uri.toString())
+                getMvpView().hideLoading()
             }
         }
     }
 
 
     override fun publishPhoto(publish: Posting) {
+        getMvpView().showLoading()
         interactorPhoto.getUser().addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
                 getMvpView().onError("Erro ao salvar a postagem!")
+                getMvpView().hideLoading()
             }
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -38,6 +43,7 @@ class FilterPhotoPresenter<V: FilterPhotoContract.View, I: FilterPhotoContract.I
                 interactor.publishPhoto(publish)
                 interactorPhoto.updateUser(user)
                 getMvpView().showMessage("Postagem feita com sucesso!")
+                getMvpView().hideLoading()
                 getMvpView().onFinish()
             }
         })
