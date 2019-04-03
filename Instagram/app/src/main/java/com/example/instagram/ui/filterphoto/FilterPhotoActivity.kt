@@ -17,6 +17,8 @@ import com.zomato.photofilters.utils.ThumbnailItem
 import com.zomato.photofilters.utils.ThumbnailsManager
 import kotlinx.android.synthetic.main.activity_filter_photo.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.io.ByteArrayOutputStream
+import java.util.*
 import javax.inject.Inject
 
 class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
@@ -29,6 +31,8 @@ class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
 
     private var filters: ArrayList<ThumbnailItem> = arrayListOf()
     private var image: Bitmap? = null
+    private var imageCopy: Bitmap? = null
+    private var identify = UUID.randomUUID().toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,7 @@ class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
         var photo = intent.extras.get(AppConstants.PHOTO_POSTING) as ByteArray
         image = Base64Utils.decodebase64InBitmap(photo)
         imgPhoto.setImageBitmap(image)
+        imageCopy = image!!.copy(image!!.config, true)
 
         getFilters()
 
@@ -53,7 +58,6 @@ class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
 
         recyclerFilter.addOnItemTouchListener(RecyclerViewItemClickListener(applicationContext, recyclerFilter, object:RecyclerViewItemClickListener.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
-                var imageCopy = image!!.copy(image!!.config, true)
                 var filter = filters[position].filter
                 imgPhoto.setImageBitmap(filter.processFilter(imageCopy))
             }
@@ -73,9 +77,9 @@ class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
 
         when(item?.itemId){
             R.id.publishPhoto -> {
-                var posting = Posting(
-
-                )
+                var baos = ByteArrayOutputStream()
+                imageCopy?.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+                presenter.savedPhoto(baos.toByteArray(), identify)
             }
         }
 
@@ -104,5 +108,15 @@ class FilterPhotoActivity : BaseActivity(), FilterPhotoContract.View {
         }
 
         filters.addAll(ThumbnailsManager.processThumbs(applicationContext))
+    }
+
+    override fun savedPosting(pathPhoto: String) {
+        var posting = Posting(
+            identify,
+            "",
+            txtDescriptionPhoto?.text.toString(),
+            pathPhoto
+        )
+        presenter.publishPhoto(posting)
     }
 }

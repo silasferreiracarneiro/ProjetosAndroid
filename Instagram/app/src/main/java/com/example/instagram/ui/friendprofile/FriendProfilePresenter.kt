@@ -2,6 +2,7 @@ package com.example.instagram.ui.friendprofile
 
 import com.example.instagram.R
 import com.example.instagram.model.Follower
+import com.example.instagram.model.Posting
 import com.example.instagram.model.User
 import com.example.instagram.ui.base.BasePresenter
 import com.example.instagram.utils.Base64Utils
@@ -69,6 +70,23 @@ class FriendProfilePresenter<V: FriendProfileContract.View, I: FriendProfileCont
 
             override fun onCancelled(p0: DatabaseError) {
                 getMvpView().onError("Erro ao buscar o usuário!")
+            }
+        })
+    }
+
+    override fun getAllPosting(identify: String) {
+        interactorFriend.getAllPosting(Base64Utils.encode(identify)).addListenerForSingleValueEvent(object: ValueEventListener{
+
+            override fun onDataChange(p0: DataSnapshot) {
+                var postagens = arrayListOf<Posting>()
+                p0.children.forEach{
+                    postagens.add(it.getValue(Posting::class.java)!!)
+                }
+                getMvpView().setAllPosting(postagens)
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                getMvpView().onError("Erro ao buscar as postagens!")
             }
         })
     }

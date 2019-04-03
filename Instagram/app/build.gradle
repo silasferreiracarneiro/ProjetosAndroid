@@ -59,6 +59,9 @@ dependencies {
     //Android Photo Filters
     implementation 'info.androidhive:imagefilters:1.0.7'
 
+    //Image load
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'

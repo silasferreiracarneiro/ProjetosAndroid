@@ -4,12 +4,18 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.model.Follower
+import com.example.instagram.model.Posting
 import com.example.instagram.model.User
 import com.example.instagram.ui.base.BaseActivity
 import com.example.instagram.utils.AppConstants.Companion.USER_INTENT
 import com.example.instagram.utils.Base64Utils
 import com.example.instagram.utils.Base64Utils.decodeBase64ToByte
 import com.example.instagram.utils.Base64Utils.decodebase64InBitmap
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache
+import com.nostra13.universalimageloader.core.ImageLoader
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -36,6 +42,18 @@ class FriendProfileActivity : BaseActivity(), FriendProfileContract.View {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp)
 
         presenter.following(userIntent!!)
+        presenter.getAllPosting(userIntent?.email!!)
+
+        var config = ImageLoaderConfiguration
+            .Builder(this)
+            .memoryCache(LruMemoryCache(2 * 1024 * 1024))
+            .memoryCacheSize(2 * 1024 * 1024)
+            .diskCacheSize(50 * 1024 * 1024)
+            .diskCacheFileCount(100)
+            .diskCacheFileNameGenerator(HashCodeFileNameGenerator())
+            .build()
+
+        ImageLoader.getInstance().init(config)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -71,5 +89,11 @@ class FriendProfileActivity : BaseActivity(), FriendProfileContract.View {
         qtPublicao.text = user?.qtPosting!!.toString()
         qtSeguidor.text = user?.qtFollower!!.toString()
         qtSeguindo.text = user?.qtFollowing!!.toString()
+    }
+
+    override fun setAllPosting(postagens: ArrayList<Posting>) {
+        qtPublicao.text = postagens?.size!!.toString()
+        griviewProfile.columnWidth = resources.displayMetrics.widthPixels / 3
+        griviewProfile.adapter = FriendProfileAdapter(applicationContext, postagens)
     }
 }

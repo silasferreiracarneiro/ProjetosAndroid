@@ -121,8 +121,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideFriendProfileInteractor(repository: UserRepository, followerRepository: FollowerRepository): FriendProfileContract.Interactor {
-        return FriendProfileInteractor(repository, followerRepository)
+    fun provideFriendProfileInteractor(repository: UserRepository, followerRepository: FollowerRepository, postingRepository: PostingRepository): FriendProfileContract.Interactor {
+        return FriendProfileInteractor(repository, followerRepository, postingRepository)
     }
 
     //PROFILE
@@ -173,8 +173,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideFilterPhotoInteractor(repository: PostingRepository): FilterPhotoContract.Interactor {
-        return FilterPhotoInteractor(repository)
+    fun provideFilterPhotoInteractor(repository: PostingRepository, repositoryUser: UserRepository): FilterPhotoContract.Interactor {
+        return FilterPhotoInteractor(repository, repositoryUser)
     }
 
     //REPOSITORY
