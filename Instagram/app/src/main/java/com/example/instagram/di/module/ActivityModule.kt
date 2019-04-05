@@ -12,6 +12,9 @@ import com.example.instagram.data.network.repository.PostingRepository
 import com.example.instagram.data.network.repository.UserRepository
 import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.di.PerActivity
+import com.example.instagram.ui.comment.CommentContract
+import com.example.instagram.ui.comment.CommentInteractor
+import com.example.instagram.ui.comment.CommentPresenter
 import com.example.instagram.ui.editprofile.EditProfileContract
 import com.example.instagram.ui.editprofile.EditProfileInteractor
 import com.example.instagram.ui.editprofile.EditProfilePresenter
@@ -180,6 +183,20 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
                                      repositoryFollowerRepository: FollowerRepository,
                                      repositoryFeedRepository: FeedRepository): FilterPhotoContract.Interactor {
         return FilterPhotoInteractor(repository, repositoryUser, repositoryFollowerRepository, repositoryFeedRepository)
+    }
+
+    //COMMENT
+    @Provides
+    @PerActivity
+    fun provideCommentPresenter(interactor: CommentContract.Interactor, pref: PreferencesHelper): CommentContract.Presenter<CommentContract.View, CommentContract.Interactor>{
+        return CommentPresenter(interactor, pref)
+    }
+
+    @Provides
+    @PerActivity
+    fun provideCommentInteractor(repositoryUser: UserRepository,
+                              repositoryFeedRepository: FeedRepository): CommentContract.Interactor {
+        return CommentInteractor(repositoryFeedRepository, repositoryUser)
     }
 
     //REPOSITORY

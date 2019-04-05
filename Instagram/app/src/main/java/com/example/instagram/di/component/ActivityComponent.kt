@@ -2,6 +2,7 @@ package com.example.instagram.di.component
 
 import com.example.instagram.di.PerActivity
 import com.example.instagram.di.module.ActivityModule
+import com.example.instagram.ui.comment.CommentActivity
 import com.example.instagram.ui.editprofile.EditProfileActivity
 import com.example.instagram.ui.filterphoto.FilterPhotoActivity
 import com.example.instagram.ui.friendprofile.FriendProfileActivity
@@ -25,6 +26,7 @@ interface ActivityComponent {
     fun inject(activity: EditProfileActivity)
     fun inject(activity: FilterPhotoActivity)
     fun inject(activity: FriendProfileActivity)
+    fun inject(activity: CommentActivity)
 
     fun inject(fragment: SearchFragment)
     fun inject(fragment: ProfileFragment)

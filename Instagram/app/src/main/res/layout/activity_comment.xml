@@ -26,12 +26,12 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/editText" android:layout_weight="1" android:hint="Escreva um comentário"
+                    android:id="@+id/edtMessageComment" android:layout_weight="1" android:hint="Escreva um comentário"
                     android:paddingBottom="5dp" android:paddingLeft="15dp" android:paddingRight="15dp"
                     android:paddingTop="5dp" android:background="@android:color/transparent"/>
             <Button
                     android:layout_width="40dp"
-                    android:layout_height="40dp" android:id="@+id/button"
+                    android:layout_height="40dp" android:id="@+id/btnSendComment"
                     android:background="@drawable/ic_send_black_24dp"/>
         </LinearLayout>
     </LinearLayout>
