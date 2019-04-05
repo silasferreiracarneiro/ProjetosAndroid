@@ -15,7 +15,9 @@ class SearchPresenter<V: SearchContract.View, I: SearchContract.Interactor>
 
     override fun searchUser(caracter: String?) {
         getMvpView().setVisibleProgress()
-        interactorSearch.searchUser(caracter?.toUpperCase()!!).addListenerForSingleValueEvent(object: ValueEventListener{
+
+        interactorSearch.searchUser(caracter?.toUpperCase()!!)
+            .addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 listUsers = arrayListOf()
                 p0.children.forEach{

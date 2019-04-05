@@ -28,8 +28,8 @@ class FriendProfileInteractor(var repository: UserRepository,
         return repository.getUser()
     }
 
-    override fun following(email: String): DatabaseReference? {
-        return followerRepository.following(email)
+    override fun following(email: String, userLog: String): DatabaseReference? {
+        return followerRepository.following(email, userLog)
     }
 
     override fun savedFollower(follower: Follower) {

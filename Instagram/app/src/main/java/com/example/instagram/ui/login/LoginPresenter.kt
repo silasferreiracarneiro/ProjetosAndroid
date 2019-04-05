@@ -20,6 +20,7 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
             getMvpView().showLoading()
             interactorLogin.signInUser(user).addOnCompleteListener{
                 if(it.isSuccessful){
+                    prefHelter.setEmailUser(user.email)
                     getMvpView().goToHome()
                 }else{
                     getMvpView().hideLoading()
@@ -41,7 +42,9 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
     }
 
     override fun loggedIn() {
-        if(interactorLogin.loggedIn() != null){
+        var user = interactorLogin.loggedIn()
+        if(user != null){
+            prefHelter.setEmailUser(user?.email!!)
             getMvpView().goToHome()
         }
     }

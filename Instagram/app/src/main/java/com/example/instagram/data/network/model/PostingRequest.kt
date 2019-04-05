@@ -21,12 +21,8 @@ class PostingRequest(var firebaseConfig: ConfigFirebaseContract): PostingReposit
 
     override fun publishPhoto(publish: Posting) {
         var map = mutableMapOf<String, Any>()
-
         var url = "/${publish.idUser}/${publish.id}"
-
         map["$POSTING/$url"] = publish
-        map["$FEED/$url"] = publish
-
         firebaseConfig.database().updateChildren(map)
     }
 }

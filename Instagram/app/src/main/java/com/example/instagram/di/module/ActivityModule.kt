@@ -117,8 +117,8 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
     //FRIEND PROFILE
     @Provides
     @PerActivity
-    fun provideFriendProfilePresenter(interactor: FriendProfileContract.Interactor): FriendProfileContract.Presenter<FriendProfileContract.View, FriendProfileContract.Interactor>{
-        return FriendProfilePresenter(interactor)
+    fun provideFriendProfilePresenter(interactor: FriendProfileContract.Interactor, pref:PreferencesHelper): FriendProfileContract.Presenter<FriendProfileContract.View, FriendProfileContract.Interactor>{
+        return FriendProfilePresenter(interactor, pref)
     }
 
     @Provides
@@ -162,21 +162,24 @@ class ActivityModule(appCompatActivity: AppCompatActivity) {
 
     @Provides
     @PerActivity
-    fun provideFeedInteractor(repository: UserRepository): FeedContract.Interactor {
-        return FeedInteractor(repository)
+    fun provideFeedInteractor(repository: UserRepository, feedRepository: FeedRepository): FeedContract.Interactor {
+        return FeedInteractor(repository, feedRepository)
     }
 
     //FILTER PHOTO
     @Provides
     @PerActivity
-    fun provideFilterPhotoPresenter(interactor: FilterPhotoContract.Interactor): FilterPhotoContract.Presenter<FilterPhotoContract.View, FilterPhotoContract.Interactor>{
-        return FilterPhotoPresenter(interactor)
+    fun provideFilterPhotoPresenter(interactor: FilterPhotoContract.Interactor, pref: PreferencesHelper): FilterPhotoContract.Presenter<FilterPhotoContract.View, FilterPhotoContract.Interactor>{
+        return FilterPhotoPresenter(interactor, pref)
     }
 
     @Provides
     @PerActivity
-    fun provideFilterPhotoInteractor(repository: PostingRepository, repositoryUser: UserRepository, repositoryFollowerRepository: FollowerRepository): FilterPhotoContract.Interactor {
-        return FilterPhotoInteractor(repository, repositoryUser, repositoryFollowerRepository)
+    fun provideFilterPhotoInteractor(repository: PostingRepository,
+                                     repositoryUser: UserRepository,
+                                     repositoryFollowerRepository: FollowerRepository,
+                                     repositoryFeedRepository: FeedRepository): FilterPhotoContract.Interactor {
+        return FilterPhotoInteractor(repository, repositoryUser, repositoryFollowerRepository, repositoryFeedRepository)
     }
 
     //REPOSITORY

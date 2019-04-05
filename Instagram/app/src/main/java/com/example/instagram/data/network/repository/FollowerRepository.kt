@@ -7,6 +7,6 @@ interface FollowerRepository {
 
     fun savedFollower(follower: Follower)
     fun savedFolloweres(follower: Follower)
-    fun following(email: String): DatabaseReference?
+    fun following(email: String, userLog: String): DatabaseReference?
     fun getAllFollowing(idUser: String): DatabaseReference?
 }

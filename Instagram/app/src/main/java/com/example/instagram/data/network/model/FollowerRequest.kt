@@ -13,22 +13,21 @@ class FollowerRequest(var firebaseConfig: ConfigFirebaseContract): FollowerRepos
     override fun savedFolloweres(follower: Follower) {
         var idFollower = follower.idFollower
         var idFollowing = follower.idFollowing
-        firebaseConfig.database().child(SEGUIDORES).child(idFollower).child(idFollowing).setValue(follower)
+        firebaseConfig.database().child(SEGUINDO).child(idFollowing).child(idFollower).setValue(follower)
     }
 
     override fun savedFollower(follower: Follower) {
         var idFollower = follower.idFollower
         var idFollowing = follower.idFollowing
-        firebaseConfig.database().child(SEGUINDO).child(idFollowing).child(idFollower).setValue(follower)
+        firebaseConfig.database().child(SEGUIDORES).child(idFollower).child(idFollowing).setValue(follower)
 
     }
 
-    override fun following(email: String): DatabaseReference? {
-        return firebaseConfig.database().child(SEGUINDO).child(Base64Utils.encode(email)).child(Base64Utils.encode(firebaseConfig.authFirebase().currentUser?.email))
+    override fun following(email: String, userLog: String): DatabaseReference? {
+        return firebaseConfig.database().child(SEGUIDORES).child(Base64Utils.encode(userLog)).child(Base64Utils.encode(email))
     }
 
     override fun getAllFollowing(idUser: String): DatabaseReference? {
         return firebaseConfig.database().child(SEGUIDORES).child(idUser)
     }
-
 }

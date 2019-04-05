@@ -61,8 +61,8 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
     override fun setUser(user: User) {
         loadPhoto(user?.photo!!)
         qtPublicao.text = user?.qtPosting!!.toString()
-        qtSeguidor.text = user?.qtFollower!!.toString()
-        qtSeguindo.text = user?.qtFollowing!!.toString()
+        qtSeguidor.text = user?.qtFollowing!!.toString()
+        qtSeguindo.text = user?.qtFollower!!.toString()
         presenter.loadPosting()
     }
 

@@ -1,6 +1,7 @@
 package com.example.instagram.ui.friendprofile
 
 import com.example.instagram.R
+import com.example.instagram.data.prefs.PreferencesHelper
 import com.example.instagram.model.Follower
 import com.example.instagram.model.Posting
 import com.example.instagram.model.User
@@ -11,11 +12,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 class FriendProfilePresenter<V: FriendProfileContract.View, I: FriendProfileContract.Interactor>
-    constructor(var interactorFriend: I):
+    constructor(var interactorFriend: I, var prefHelter: PreferencesHelper):
     BasePresenter<V, I>(interactorFriend), FriendProfileContract.Presenter<V, I> {
 
     override fun following(user: User) {
-        interactorFriend.following(user.email)?.addValueEventListener(object: ValueEventListener{
+
+        interactorFriend.following(user.email, prefHelter.getEmailUser())?.addValueEventListener(object: ValueEventListener{
 
             var email = ""
 
@@ -61,11 +63,11 @@ class FriendProfilePresenter<V: FriendProfileContract.View, I: FriendProfileCont
                 follower.user.qtFollowing = follower.user.qtFollower + 1
                 follower.idFollower = Base64Utils.encode(user?.email)
 
-                interactorFriend.savedFollower(follower)
                 interactorFriend.upadteUser(user)
                 interactorFriend.upadteUser(follower.user)
+                interactorFriend.savedFollower(follower)
 
-                interactorFriend.savedFolloweres(follower)
+                //interactorFriend.savedFolloweres(follower)
 
                 getMvpView().setTextButtonFollowing(getMvpView().onGetString(R.string.seguindo), false)
             }

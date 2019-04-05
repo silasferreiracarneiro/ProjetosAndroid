@@ -1,5 +1,6 @@
 package com.example.instagram.ui.filterphoto
 
+import com.example.instagram.model.Feed
 import com.example.instagram.model.Posting
 import com.example.instagram.model.User
 import com.google.firebase.database.DatabaseReference
@@ -25,5 +26,6 @@ interface FilterPhotoContract {
         fun getUser(): DatabaseReference
         fun updateUser(user: User)
         fun getAllFollowing(idUser: String): DatabaseReference?
+        fun savedFeed(feed: Feed, user: User)
     }
 }

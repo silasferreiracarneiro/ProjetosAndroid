@@ -24,7 +24,7 @@ interface FriendProfileContract {
     }
 
     interface Interactor: MvpInteractor{
-        fun following(email: String): DatabaseReference?
+        fun following(email: String, userLog: String): DatabaseReference?
         fun getUser(): DatabaseReference
         fun upadteUser(user: User)
         fun savedFollower(follower: Follower)

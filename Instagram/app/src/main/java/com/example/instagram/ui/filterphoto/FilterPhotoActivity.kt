@@ -12,6 +12,7 @@ import com.example.instagram.ui.base.BaseActivity
 import com.example.instagram.utils.AppConstants
 import com.example.instagram.utils.Base64Utils
 import com.example.instagram.utils.RecyclerViewItemClickListener
+import com.like.IconType
 import com.zomato.photofilters.FilterPack
 import com.zomato.photofilters.utils.ThumbnailItem
 import com.zomato.photofilters.utils.ThumbnailsManager

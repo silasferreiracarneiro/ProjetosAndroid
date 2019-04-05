@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.model.Posting
 import com.example.instagram.model.User
-import com.example.instagram.utils.AppConstants
 import com.example.instagram.utils.AppConstants.Companion.POSTING
 import com.example.instagram.utils.AppConstants.Companion.USER_INTENT
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator
@@ -17,9 +16,8 @@ import com.nostra13.universalimageloader.core.ImageLoader
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration
 import com.nostra13.universalimageloader.core.assist.FailReason
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener
-import kotlinx.android.synthetic.main.activity_posting_detail.*
+import kotlinx.android.synthetic.main.adapter_feed.*
 import kotlinx.android.synthetic.main.adapter_list_user_search.*
-import kotlinx.android.synthetic.main.grid_posting.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class PostingDetailActivity : AppCompatActivity() {
