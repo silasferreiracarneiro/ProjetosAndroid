@@ -42,7 +42,10 @@ class HomeActivity : BaseActivity(), HomeContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.loggout -> presenter.signOut()
+            R.id.loggout -> {
+                presenter.signOut()
+                hideLoading()
+            }
         }
 
         return super.onOptionsItemSelected(item)

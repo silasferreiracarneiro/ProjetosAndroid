@@ -13,6 +13,10 @@ import com.google.firebase.database.DatabaseReference
 
 class FeedRequest(var firebaseConfig: ConfigFirebaseContract): FeedRepository {
 
+    override fun getAllComment(idPosting: String): DatabaseReference {
+        return firebaseConfig.database().child(COMMENTS).child(idPosting)
+    }
+
     override fun savedComment(comment: Comment) {
         var ref = firebaseConfig.database().child(COMMENTS).child(comment.idPosting)
         comment.idComment = ref.push().key!!

@@ -30,7 +30,6 @@ class FeedFragment : BaseFragment(), FeedContract.View {
             presenter.onAttach(this)
         }
 
-
         return view
     }
 
@@ -39,8 +38,10 @@ class FeedFragment : BaseFragment(), FeedContract.View {
     }
 
     override fun createFeed(list: ArrayList<Feed>) {
-        recyclerFeed.layoutManager = LinearLayoutManager(context)
-        recyclerFeed.adapter = FeedAdapter(list, presenter)
-        recyclerFeed.adapter?.notifyDataSetChanged()
+        if(recyclerFeed != null){
+            recyclerFeed.layoutManager = LinearLayoutManager(context)
+            recyclerFeed.adapter = FeedAdapter(list, presenter)
+            recyclerFeed.adapter?.notifyDataSetChanged()
+        }
     }
 }

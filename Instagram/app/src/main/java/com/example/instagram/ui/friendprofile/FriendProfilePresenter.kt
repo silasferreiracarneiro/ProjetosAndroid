@@ -57,14 +57,15 @@ class FriendProfilePresenter<V: FriendProfileContract.View, I: FriendProfileCont
     override fun savedFollower(follower: Follower) {
         interactorFriend.getUser().addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
-                var user = p0.getValue(User::class.java)
+                var userLog = p0.getValue(User::class.java)
 
-                user?.qtFollower = user?.qtFollowing!! + 1
+                userLog?.qtFollower = userLog?.qtFollowing!! + 1
                 follower.user.qtFollowing = follower.user.qtFollower + 1
-                follower.idFollower = Base64Utils.encode(user?.email)
+                follower.idFollower = Base64Utils.encode(userLog?.email)
 
-                interactorFriend.upadteUser(user)
+                interactorFriend.upadteUser(userLog)
                 interactorFriend.upadteUser(follower.user)
+                follower.user = userLog
                 interactorFriend.savedFollower(follower)
 
                 //interactorFriend.savedFolloweres(follower)

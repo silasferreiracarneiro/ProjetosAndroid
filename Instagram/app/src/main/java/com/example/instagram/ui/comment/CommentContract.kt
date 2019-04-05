@@ -8,15 +8,17 @@ import com.silasferreira.whatsapp.ui.base.MvpView
 
 interface CommentContract {
     interface View: MvpView{
-
+        fun setAllComment(list: ArrayList<Comment>)
     }
 
     interface Presenter<V: CommentContract.View, I: CommentContract.Interactor>: MvpPresenter<V, I>{
         fun savedComment(comment: Comment)
+        fun getAllComment(idPosting: String)
     }
 
     interface Interactor: MvpInteractor{
         fun savedComment(comment: Comment)
         fun getuser(email: String): DatabaseReference
+        fun getAllComment(idPosting: String): DatabaseReference
     }
 }

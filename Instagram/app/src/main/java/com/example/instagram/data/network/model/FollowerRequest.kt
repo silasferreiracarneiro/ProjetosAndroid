@@ -17,9 +17,9 @@ class FollowerRequest(var firebaseConfig: ConfigFirebaseContract): FollowerRepos
     }
 
     override fun savedFollower(follower: Follower) {
-        var idFollower = follower.idFollower
         var idFollowing = follower.idFollowing
-        firebaseConfig.database().child(SEGUIDORES).child(idFollower).child(idFollowing).setValue(follower)
+        firebaseConfig.database().child(SEGUIDORES).child(idFollowing)
+            .child(Base64Utils.encode(firebaseConfig.authFirebase().currentUser?.email)).setValue(follower)
 
     }
 

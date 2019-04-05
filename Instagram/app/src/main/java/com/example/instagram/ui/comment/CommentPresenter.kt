@@ -14,13 +14,29 @@ class CommentPresenter<V: CommentContract.View, I: CommentContract.Interactor>
     @Inject constructor(var feedIterator: I, var pref: PreferencesHelper):
     BasePresenter<V, I>(feedIterator), CommentContract.Presenter<V, I> {
 
+    override fun getAllComment(idPosting: String) {
+        feedIterator.getAllComment(idPosting).addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                getMvpView().onError("Erro ao buscar os comentários!")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                var list = arrayListOf<Comment>()
+                p0.children.forEach {
+                    list.add(it.getValue(Comment::class.java)!!)
+                }
+                getMvpView().setAllComment(list)
+            }
+        })
+    }
+
 
     override fun savedComment(comment: Comment) {
 
         if(comment.text == "" || comment.text.isEmpty()){
             getMvpView().onError("Informe um comentário!")
         }else{
-            feedIterator.getuser(Base64Utils.encode(pref.getEmailUser())).addValueEventListener(object: ValueEventListener{
+            feedIterator.getuser(pref.getEmailUser()).addValueEventListener(object: ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                     getMvpView().onError("Erro ao buscar o usuário logado!")
                 }
@@ -30,6 +46,7 @@ class CommentPresenter<V: CommentContract.View, I: CommentContract.Interactor>
                     comment.nameUser = user?.nameUser!!
                     comment.idUser = Base64Utils.encode(user?.email)
                     comment.pathPhotoUser = user?.photo
+                    feedIterator.savedComment(comment)
                 }
             })
         }

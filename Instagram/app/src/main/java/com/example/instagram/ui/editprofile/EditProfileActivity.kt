@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.model.User
@@ -97,6 +98,13 @@ class EditProfileActivity : BaseActivity(), EditProfileContract.View {
     }
 
     override fun getImageSelect(): ByteArray {
+        if(this.photo == null){
+
+            var image = imgProfileUser.drawable.toBitmap()
+            var baos = ByteArrayOutputStream()
+            image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            return baos.toByteArray()
+        }
         return this.photo!!
     }
 }

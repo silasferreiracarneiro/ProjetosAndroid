@@ -11,4 +11,5 @@ interface FeedRepository {
     fun gelAllFeed(): DatabaseReference
     fun updateFeed(item: Feed)
     fun savedComment(comment: Comment)
+    fun getAllComment(idPosting: String): DatabaseReference
 }
