@@ -11,13 +11,14 @@ class AppConstants {
         val NULL_STRING = ""
 
         //Firebase
-        val USER = "usuarios"
+        val USER = "users"
         val USER_NAME = "name"
 
         val SEGUINDO = "seguindo"
         val SEGUIDORES = "seguidores"
         val LIKES = "likes"
         val FEED = "feed"
+        val COMMENTS = "comment"
 
         //Intent
         val USER_INTENT = "usuario"
