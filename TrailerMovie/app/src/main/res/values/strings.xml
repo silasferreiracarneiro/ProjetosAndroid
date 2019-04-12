@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TrailerMovie</string>
+    <string name="vamos_nessa">Vamos nessa?</string>
+    <string name="mostra_trailer">Aqui é mostrado apenas os trailers dos filmes!</string>
+    <string name="usando_api_the_movie">Usando, a API do \'The Movie Database!\'</string>
+    <string name="basta_continuar">Para ver os trailers, basta continuar, e concluir o carrossel</string>
+    <string name="apenas_conhecimento">Este app, é apenas para desenvolvimento do meu conhecimento!</string>
+    <string name="introducao">Introdução</string>
+    <string name="leia_com_atencao">Leia com atenção!</string>
 </resources>
