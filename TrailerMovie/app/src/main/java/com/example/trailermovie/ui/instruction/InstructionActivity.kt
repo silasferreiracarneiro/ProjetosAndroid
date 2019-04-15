@@ -1,6 +1,5 @@
 package com.example.trailermovie.ui.instruction
 
-import android.graphics.Color
 import android.os.Bundle
 import com.github.paolorotolo.appintro.AppIntro
 import com.github.paolorotolo.appintro.AppIntroFragment
