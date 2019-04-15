@@ -7,4 +7,8 @@
     <string name="apenas_conhecimento">Este app, é apenas para desenvolvimento do meu conhecimento!</string>
     <string name="introducao">Introdução</string>
     <string name="leia_com_atencao">Leia com atenção!</string>
+    <string name="nome">Nome</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="salvar">Salvar</string>
 </resources>
