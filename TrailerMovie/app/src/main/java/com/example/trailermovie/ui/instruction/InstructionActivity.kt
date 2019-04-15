@@ -51,4 +51,9 @@ class InstructionActivity : AppIntro() {
         super.onDonePressed(currentFragment)
         startActivity(Intent(this, LoginActivity::class.java))
     }
+
+    override fun onSkipPressed(currentFragment: Fragment?) {
+        super.onSkipPressed(currentFragment)
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
 }
