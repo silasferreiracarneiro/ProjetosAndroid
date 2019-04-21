@@ -14,5 +14,7 @@ interface ApiService {
                 @Query("order") order: String,
                 @Query("maxResult") maxResult: String,
                 @Query("key") key: String,
-                @Query("channelId") channelId: String) : Deferred<Response<VideoResponse>>
+                @Query("channelId") channelId: String,
+                @Query("q") q: String
+    ) : Deferred<Response<VideoResponse>>
 }

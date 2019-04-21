@@ -9,15 +9,14 @@ import com.silasferreira.youtube.data.RetrofitConfig
 import com.silasferreira.youtube.data.network.BaseRepository
 import com.silasferreira.youtube.data.network.VideoRepository
 import com.silasferreira.youtube.data.network.model.VideoResponse
-import javax.inject.Inject
 
 class AppVideoRepository : BaseRepository() ,VideoRepository {
 
     private var service: RetrofitConfig = RetrofitConfig()
 
-    override suspend fun getVideo(): VideoResponse? {
+    override suspend fun getVideo(search: String): VideoResponse? {
         return safeApiCall(
-            call = { service.api.getVideo(SNIPPET, DATE, MAX_RESULT, GOOGLE_API_KEY, COVER_ID).await() },
+            call = { service.api.getVideo(SNIPPET, DATE, MAX_RESULT, GOOGLE_API_KEY, COVER_ID, search).await() },
             errorMessage = "Erro ao buscar os vídeos!"
         )
     }

@@ -14,5 +14,8 @@ class AppContants {
 
         //Retrofit
         const val URL_BASE = "https://www.googleapis.com/youtube/v3/"
+
+        //Intent
+        const val VIDEO_ID = "video_id"
     }
 }

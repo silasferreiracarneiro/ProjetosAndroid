@@ -6,15 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@android:color/white"
-        tools:context=".ui.home.HomeActivity">
+        android:background="@android:color/black"
+        tools:context=".ui.player.PlayerActivity">
 
-    <include layout="@layout/toolbar"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerVideo"
+    <com.google.android.youtube.player.YouTubePlayerView
+            android:id="@+id/playerVideo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
+    </com.google.android.youtube.player.YouTubePlayerView>
 
 </LinearLayout>
