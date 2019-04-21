@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Youtube</string>
+    <string name="search_video">Buscar Vídeos</string>
+    <string name="some_error">Algum erro ocorreu!</string>
+    <string name="permissao_negada">Permissões negadas</string>
+    <string name="necessita_de_permissao">Para utilizar o app é necessário aceitar as permissões</string>
+    <string name="confirma">Confirmar</string>
 </resources>
