@@ -60,10 +60,10 @@ class HomeActivity : BaseActivity(), HomeContract.View {
         presenter.getVideo("")
     }
 
-    override fun setVideo(items: ArrayList<Items>?) {
+    override fun setVideo(items: List<Items>) {
         recyclerVideo.setHasFixedSize(true)
         recyclerVideo.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
-        recyclerVideo.adapter = HomeAdapter(items!!)
+        recyclerVideo.adapter = HomeAdapter(items)
         recyclerVideo.adapter?.notifyDataSetChanged()
 
         recyclerVideo.addOnItemTouchListener(RecyclerViewItemClickListener(this, recyclerVideo, object:RecyclerViewItemClickListener.OnItemClickListener{

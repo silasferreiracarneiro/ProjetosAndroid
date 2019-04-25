@@ -11,9 +11,9 @@ class HomePresenter<V: HomeContract.View, I: HomeContract.Interactor>
     override fun getVideo(search: String) {
 
         CoroutineScope(Dispatchers.IO).launch {
-            var video = interactorHome.getVideo(search)
+            val video = interactorHome.getVideo(search)
             withContext(Dispatchers.Main) {
-                getMvpView().setVideo(video?.items)
+                getMvpView().setVideo(video?.items ?: emptyList())
             }
         }
     }

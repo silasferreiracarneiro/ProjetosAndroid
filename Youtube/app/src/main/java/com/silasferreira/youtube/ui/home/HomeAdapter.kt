@@ -9,7 +9,7 @@ import com.silasferreira.youtube.R
 import com.silasferreira.youtube.model.Items
 import com.squareup.picasso.Picasso
 
-class HomeAdapter(var listVideo: ArrayList<Items> = arrayListOf()): androidx.recyclerview.widget.RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(var listVideo: List<Items> = arrayListOf()): androidx.recyclerview.widget.RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): HomeViewHolder {
         var view = LayoutInflater.from(p0.context).inflate(R.layout.adapter_video, p0, false)

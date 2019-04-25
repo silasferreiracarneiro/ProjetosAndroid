@@ -17,6 +17,6 @@ interface HomeContract {
     }
 
     interface View : MvpView{
-        fun setVideo(items: ArrayList<Items>?)
+        fun setVideo(items: List<Items>)
     }
 }
