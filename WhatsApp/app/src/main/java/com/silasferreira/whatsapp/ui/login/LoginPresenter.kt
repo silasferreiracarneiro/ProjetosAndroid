@@ -18,7 +18,7 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
 
     override fun signIn(user: Usuario) {
         contractInteractor.signIn(user)
-            .addOnCompleteListener(OnCompleteListener {
+            .addOnCompleteListener {
                 if(it.isSuccessful){
                     prefHelter.setUserId(encode(user.email))
                     prefHelter.setNameUser(user.nome)
@@ -34,7 +34,7 @@ class LoginPresenter<V: LoginContract.View, I: LoginContract.Interactor>
                     it.exception?.printStackTrace()
                     getMvpView().showMessage(message)
                 }
-        }).addOnFailureListener(OnFailureListener {
+            }.addOnFailureListener(OnFailureListener {
             it.printStackTrace()
             getMvpView().onError("Erro ao logar!")
         })

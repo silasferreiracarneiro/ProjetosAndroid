@@ -21,7 +21,7 @@ class CadastroPresenter<V : CadastroContract.View, I : CadastroContract.Interact
     override fun createUser(user: Usuario) {
         if(this.validateUser(user)){
 
-            contractInteractor.createUser(user).addOnCompleteListener(OnCompleteListener {
+            contractInteractor.createUser(user).addOnCompleteListener {
                 if(it.isSuccessful){
                     this.savedUser(user)
                     getMvpView().showMessage("Usuário salvo com sucesso!")
@@ -36,9 +36,11 @@ class CadastroPresenter<V : CadastroContract.View, I : CadastroContract.Interact
                     getMvpView().onError(messageUser)
                 }
 
-            }).addOnFailureListener(OnFailureListener {
+            }.addOnFailureListener {
                 getMvpView().onError("Erro ao cadastrar a conta!")
-            })
+            }
+        }else{
+            getMvpView().onError("Informe um usuário válido!")
         }
     }
 
@@ -51,19 +53,19 @@ class CadastroPresenter<V : CadastroContract.View, I : CadastroContract.Interact
     }
 
     override fun deleteUserInAuthentication() {
-        contractInteractor.deleteUserInAuthentication()?.addOnCompleteListener(OnCompleteListener {
+        contractInteractor.deleteUserInAuthentication()?.addOnCompleteListener {
             if(it.isSuccessful){
                 Log.e(ERROR, "Usuário deletado por algum erro!")
             } else {
                 Log.e(ERROR, "Usuario não foi deletado!!")
             }
-        })?.addOnFailureListener(OnFailureListener {
+        }?.addOnFailureListener {
             Log.e(ERROR, "Usuario não foi deletado!!")
-        })
+        }
     }
 
-    private fun validateUser(user: Usuario) : Boolean{
-        if(user.nome.isEmpty() || user.email.isEmpty() || user.senha.isEmpty())
+    private fun validateUser(user: Usuario) : Boolean {
+        if(user.nome == "" || user.email == "" || user.senha == "")
             return false
         return true
     }
